@@ -121,6 +121,7 @@
 
     input[type="text"],
     input[type="tel"],
+    input[type="password"],
     input[type="number"],
     input[type="date"],
     select,
@@ -213,6 +214,15 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px 20px;
       align-items: end;
+    }
+
+    .lookup-box .lookup-fields .field {
+      min-width: 0;
+    }
+
+    .lookup-box .lookup-fields .field input {
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .lookup-box .lookup-fields .field.full {
@@ -893,8 +903,8 @@
               <input type="text" id="lookupCustomerNo" name="customerNo" placeholder="例：12345678" />
             </div>
             <div class="field">
-              <label for="lookupTel">電話番号<span class="optional">任意</span></label>
-              <input type="tel" id="lookupTel" name="tel" placeholder="例：03-1234-5678" />
+              <label for="lookupPasscode">パスコード<span class="optional">任意</span></label>
+              <input type="password" id="lookupPasscode" name="passcode" placeholder="例：1234" autocomplete="off" />
             </div>
             <div class="field full">
               <button type="button" class="btn-lookup" id="btnLookup">参照する</button>
@@ -1121,7 +1131,6 @@
               <div class="confirm-row"><span class="confirm-label">お客様番号</span><span class="confirm-value">12345678</span></div>
               <div class="confirm-row"><span class="confirm-label">氏名</span><span class="confirm-value">山田 太郎</span></div>
               <div class="confirm-row"><span class="confirm-label">フリガナ</span><span class="confirm-value">ヤマダ タロウ</span></div>
-              <div class="confirm-row"><span class="confirm-label">電話番号</span><span class="confirm-value">03-1234-5678</span></div>
               <div class="confirm-row"><span class="confirm-label">郵便番号</span><span class="confirm-value">100-0001</span></div>
               <div class="confirm-row"><span class="confirm-label">住所</span><span class="confirm-value">東京都千代田区千代田1-1</span></div>
             </div>
@@ -1198,7 +1207,7 @@
       var btnBackLast = document.getElementById('btnBackLast');
       var btnLookup = document.getElementById('btnLookup');
       var lookupCustomerNo = document.getElementById('lookupCustomerNo');
-      var lookupTel = document.getElementById('lookupTel');
+      var lookupPasscode = document.getElementById('lookupPasscode');
       var customerDetails = document.getElementById('customerDetails');
       var lookupMessage = document.getElementById('lookupMessage');
 
@@ -1215,13 +1224,13 @@
       btnLookup.addEventListener('click', function () {
         hideLookupMessage();
         var no = (lookupCustomerNo.value || '').trim();
-        var tel = (lookupTel.value || '').trim();
+        var passcode = (lookupPasscode.value || '').trim();
         customerDetails.classList.remove('disabled');
         var inputs = customerDetails.querySelectorAll('input');
         for (var i = 0; i < inputs.length; i++) {
           inputs[i].disabled = false;
         }
-        if (no && tel) {
+        if (no && passcode) {
           document.getElementById('familyName').value = '山田';
           document.getElementById('firstName').value = '太郎';
           document.getElementById('kanaFamilyName').value = 'ヤマダ';
@@ -1586,11 +1595,6 @@
         var kanaFirstName = (document.getElementById('kanaFirstName') && document.getElementById('kanaFirstName').value) || '';
         var zip = (document.getElementById('zip') && document.getElementById('zip').value) || '';
         var address = (document.getElementById('address') && document.getElementById('address').value) || '';
-        var tel = (document.getElementById('lookupTel') && document.getElementById('lookupTel').value) || (document.querySelector('input[name="tel"]') && document.querySelector('input[name="tel"]').value) || '';
-        if (!tel && document.getElementById('customerDetails')) {
-          var telInput = document.getElementById('customerDetails').querySelector('input[type="tel"]');
-          if (telInput) tel = telInput.value || '';
-        }
 
         var deliveryRows = deliveryList.querySelectorAll('.delivery-row');
         var deliveries = [];
@@ -1660,7 +1664,6 @@
         if (customerNo) html += '<div class="confirm-row"><span class="confirm-label">お客様番号</span><span class="confirm-value">' + escapeHtml(customerNo) + '</span></div>';
         html += '<div class="confirm-row"><span class="confirm-label">氏名</span><span class="confirm-value">' + escapeHtml((familyName + ' ' + firstName).trim() || '—') + '</span></div>';
         html += '<div class="confirm-row"><span class="confirm-label">フリガナ</span><span class="confirm-value">' + escapeHtml((kanaFamilyName + ' ' + kanaFirstName).trim() || '—') + '</span></div>';
-        html += '<div class="confirm-row"><span class="confirm-label">電話番号</span><span class="confirm-value">' + escapeHtml(tel) + '</span></div>';
         html += '<div class="confirm-row"><span class="confirm-label">郵便番号</span><span class="confirm-value">' + escapeHtml(zip) + '</span></div>';
         html += '<div class="confirm-row"><span class="confirm-label">住所</span><span class="confirm-value">' + escapeHtml(address) + '</span></div></div>';
 
