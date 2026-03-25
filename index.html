@@ -1,0 +1,326 @@
+<meta charset="UTF-8">&nbsp;
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="data:,">
+<title>Brave App Mockup</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"
+    crossorigin="anonymous" referrerpolicy="no-referrer">
+<style>
+    :root {
+        --primary-blue: #007bff;
+        --gradient-blue: linear-gradient(135deg, #28c7bb 0%, #4e84f5 100%);
+        --light-bg: #f8f9fa;
+        --text-dark: #333;
+        --border-color: #e0e0e0;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    }
+
+    body {
+        background-color: #f0f2f5;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+
+
+    /* ヘッダー */
+    .header {
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .header-img {
+        height: 32px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .header-img.header-img-right {
+        height: 38px;
+    }
+
+    /* スクロールエリア */
+    .main-content {
+        padding-block: 0px 8px;
+    }
+
+    /* サムネイル（メインビジュアル） */
+    .hero-banner {
+        width: 100%;
+        height: 180px;
+        background: var(--gradient-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        position: relative;
+        padding: 20px;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .hero-content p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+    }
+
+    /* セクションタイトル */
+    .section-title {
+        padding: 20px 15px 16px;
+        font-size: 16px !important;
+        font-weight: bold;
+        color: var(--text-dark);
+        text-align: center !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+
+    .section-title-icon {
+        width: 24px;
+        height: 24px;
+        object-fit: contain;
+    }
+
+    /* 登録ボタンエリア */
+    .registration-box {
+        display: flex;
+        gap: 10px;
+        padding: 0px 15px 10px;
+    }
+
+    .btn-reg {
+        flex: 1;
+        padding: 12px 5px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 0.85rem;
+        cursor: pointer;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+    }
+
+    .btn-easy {
+        background: var(--gradient-blue);
+        color: white;
+    }
+
+    .btn-phone {
+        border: 2px solid var(--primary-blue);
+        color: var(--primary-blue);
+    }
+
+    /* 検索・メニューボタン */
+    .menu-list {
+        padding: 0 15px;
+    }
+
+    .menu-item {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.95rem;
+        color: var(--text-dark);
+        background: white;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .menu-item:active {
+        background: #f0f0f0;
+    }
+
+    .menu-item i {
+        color: var(--primary-blue);
+    }
+
+    .menu-item.menu-item-img {
+        padding: 0;
+        text-decoration: none;
+        overflow: hidden;
+    }
+
+    .menu-item.menu-item-img img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    /* 求人検索・マップリンク（ピル型・グラデーション枠） */
+    .menu-search-link,
+    .menu-map-link {
+        text-decoration: none;
+        padding: 0 18px;
+        height: 44px;
+        min-height: 44px;
+        border-radius: 50px;
+        border: 2px solid transparent;
+        background: linear-gradient(white, white) padding-box,
+            linear-gradient(to right, #26a69a, #5c6bc0) border-box;
+        box-shadow: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    .menu-search-link {
+        justify-content: center;
+        gap: 12px;
+        background: linear-gradient(111.2deg, #1BAFB6 22.05%, #5F88FF 77.95%) !important;
+        border: none;
+    }
+
+    .menu-map-link {
+        justify-content: center;
+        gap: 12px;
+        background: linear-gradient(white, white) padding-box,
+            linear-gradient(111.2deg, #1BAFB6 22.05%, #5F88FF 77.95%) border-box;
+        border: 2px solid transparent;
+    }
+
+    .menu-search-link .icon-search {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        flex-shrink: 0;
+        filter: brightness(0) invert(1);
+    }
+
+    .menu-search-link .menu-search-text {
+        font-size: 14px;
+        font-weight: bold;
+        color: #fff;
+        text-align: center;
+    }
+
+    .menu-map-link .icon-map {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+        flex-shrink: 0;
+    }
+
+    .menu-map-link .fa-chevron-down {
+        color: #333;
+        -webkit-text-fill-color: #333;
+        background: none;
+        flex-shrink: 0;
+    }
+
+    .menu-search-link .menu-search-action {
+        background: linear-gradient(to right, #26a69a, #5c6bc0);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        flex-shrink: 0;
+        font-weight: bold;
+        font-size: 0.95rem;
+    }
+
+    .menu-map-link .menu-map-text {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+    }
+
+    .menu-search-link:active {
+        opacity: 0.9;
+    }
+
+    .menu-map-link:active {
+        background: linear-gradient(#f5f5f5, #f5f5f5) padding-box,
+            linear-gradient(111.2deg, #1BAFB6 22.05%, #5F88FF 77.95%) border-box;
+    }
+
+    /* フッターナビゲーション */
+    .tab-bar {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 70px;
+        background: white;
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding-bottom: 10px;
+    }
+
+    .tab-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #888;
+        font-size: 0.65rem;
+        text-decoration: none;
+    }
+
+    .tab-item.active {
+        color: var(--primary-blue);
+    }
+
+    .tab-item i {
+        font-size: 1.4rem;
+        margin-bottom: 4px;
+    }
+
+    .body {
+        background-color: #fff;
+    }
+</style>
+<div class="body">
+    <div class="main-content">
+        <div class="section-title"><img src="https://newbetter.jp/app/demo02/img/search_icon.png" alt=""
+                class="section-title-icon fr-fil fr-dib">&nbsp;求人検索</div>
+        <div class="menu-list"><a class="menu-item menu-search-link" href="https://www.braves.co.jp/"
+                rel="noopener noreferrer" target="_blank"><img src="https://newbetter.jp/app/demo02/img/icon_search.svg"
+                    alt="" class="icon-search fr-fil fr-dib"> <span class="menu-search-text">求人を検索する</span>&nbsp;</a> <a
+                class="menu-item menu-map-link"
+                href="https://ffsales-demo.eventos.tokyo/live_map/660/16024/428927/"><img
+                    src="https://newbetter.jp/app/demo02/img/icon_map.svg" alt="" class="icon-map fr-fil fr-dib"> <span
+                    class="menu-map-text">マップで探す</span>&nbsp;</a></div>
+        <div class="section-title"><img
+                src="https://www.braves.co.jp/systemdata/data/content/2025-05-19_a4392de6e8e9cbf3d1ad79f7e18455d3.png?public=1&v=1747619403"
+                alt="" class="section-title-icon fr-fil fr-dib">&nbsp;お役立ち情報</div>
+        <div class="menu-list"><a class="menu-item menu-item-img" href="https://www.braves.co.jp/"
+                rel="noopener noreferrer" target="_blank"><img src="https://newbetter.jp/app/demo02/img/ban_feature.png"
+                    alt="ブレイブの特徴" class="fr-fil fr-dib"></a> <a class="menu-item menu-item-img"
+                href="https://www.braves.co.jp/lp/kaigo.html" rel="noopener noreferrer" target="_blank"><img
+                    src="https://newbetter.jp/app/demo02/img/ban_about.png" alt="介護のお仕事について" class="fr-fil fr-dib"></a>
+        </div>
+        <div class="section-title"><img
+                src="https://www.braves.co.jp/systemdata/data/content/2025-05-19_5963bf9752151eceee2d395f8235bd32.png?public=1&v=1747619403"
+                alt="" class="section-title-icon fr-fil fr-dib">&nbsp;登録</div>
+        <div class="registration-box"><a class="btn-reg btn-easy" href="https://www.braves.co.jp/apply/1"
+                rel="noopener noreferrer" target="_blank">簡単登録</a>
+            <div class="btn-reg btn-phone">お電話でのご相談</div>
+        </div>
+    </div>
+</div>

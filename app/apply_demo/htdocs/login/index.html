@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン | 法人カタログギフト</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/style.css">
+</head>
+<body class="has-fixed-app-header">
+
+    <header class="app-fixed-header">
+        <div class="app-fixed-header__inner">
+            <a href="/app/apply_demo/htdocs/order/index.html" class="app-fixed-header__logo">
+                <img src="../assets/img/logo.png" width="200" height="40" alt="ご進物お申込み">
+            </a>
+            <nav class="app-fixed-header__nav" aria-label="ユーティリティ">
+                <a href="/app/apply_demo/htdocs/mypage/index.html" class="app-fixed-header__mypage">
+                    <span class="material-icons-outlined" aria-hidden="true">account_circle</span>
+                    <span>マイページ</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <header class="app-page-header">
+            <h1 class="app-page-heading">ログイン</h1>
+        </header>
+        <div class="login-wrapper">
+            
+            <section class="login-card">
+                <div class="card-content">
+                    <h2 class="card-title">初めてご利用の方</h2>
+                    <p class="card-description">
+                        お手元のカタログからお申し込みいただくには、まず会員登録（送り主情報の登録）をお願いいたします。
+                    </p>
+                    <div class="action-area">
+                        <a href="/app/apply_demo/htdocs/profile/index.html" class="btn btn-primary">新規会員登録へ</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="login-card login-card--split">
+                <div class="card-content">
+                    <h2 class="card-title">会員様・過去にご注文いただいた方</h2>
+
+                    <div class="login-block">
+                        <!-- <h3 class="card-subtitle">会員様</h3> -->
+                        <p class="card-description">
+                            過去にご注文いただいた方は、ご登録の電話番号と、カタログに記載されているパスワードでログインしてください。
+                        </p>
+                        <form action="#" method="POST" class="login-form" onsubmit="event.preventDefault(); window.location.href='/app/apply_demo/htdocs/order/index.html';">
+                            <div class="form-group">
+                                <label for="member-tel">電話番号</label>
+                                <input type="tel" id="member-tel" name="tel" placeholder="09012345678" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="member-password">パスワード</label>
+                                <input type="password" id="member-password" name="password" placeholder="" required>
+                            </div>
+                            <div class="action-area">
+                                <button type="submit" class="btn btn-primary">ログイン</button>
+                            </div>
+                            <div class="form-footer">
+                                <a href="#" class="link-text">パスワードをお忘れの方はこちら</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- <div class="auth-divider">
+                        <span>または</span>
+                    </div>
+
+                    <div class="login-block">
+                        <h3 class="card-subtitle">過去にご注文いただいた方</h3>
+                        <p class="card-description">
+                            ご登録の電話番号を入力のうえ、「仮パスワードを発行する」を押してください。入力いただいた電話番号宛に仮パスワードを発行いたします。上部のログイン画面より、パスワードを入力しログインしてください。
+                        </p>
+                        <form action="#" method="POST" class="login-form login-form--otp">
+                            <div class="form-group">
+                                <label for="otp-tel">電話番号</label>
+                                <input type="tel" id="otp-tel" name="tel_otp" placeholder="0312345678" required>
+                            </div>
+                            <div class="action-area">
+                                <button type="submit" class="btn btn-primary">仮パスワードを発行する</button>
+                            </div>
+                        </form>
+                    </div> -->
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p class="copyright">&copy; GIFT CATALOG SERVICE All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

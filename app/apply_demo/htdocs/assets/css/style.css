@@ -1,0 +1,363 @@
+/* --- Variables --- */
+:root {
+    --primary-color: #64517f; /* アクセントカラー */
+    --text-color: #333333;
+    --text-light: #666666;
+    --bg-color: #fcfcfc;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --serif: "Noto Serif JP", serif;
+    --sans: "Noto Sans JP", sans-serif;
+    --transition: all 0.4s ease;
+}
+
+/* --- Base Styles --- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--sans);
+    line-height: 1.8;
+    letter-spacing: 0.08em;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- Header --- */
+.site-header {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.logo {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 0;
+    text-decoration: none;
+    color: var(--text-color);
+    letter-spacing: 0.3em;
+    display: inline-block;
+}
+
+/* --- 固定ヘッダー（全ページ共通） --- */
+body.has-fixed-app-header {
+    padding-top: 100px;
+}
+
+.app-fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 16px 20px;
+    text-align: left;
+    background: #fff;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04);
+}
+
+.app-fixed-header__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.app-fixed-header__logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    line-height: 0;
+}
+
+.app-fixed-header__logo img {
+    height: 40px;
+    width: auto;
+    max-width: min(200px, 55vw);
+    object-fit: contain;
+    object-position: left center;
+}
+
+.app-fixed-header__nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 0;
+}
+
+.app-fixed-header__mypage {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 0.875rem;
+    letter-spacing: 0.08em;
+    transition: var(--transition);
+}
+
+.app-fixed-header__mypage:hover {
+    color: var(--primary-color);
+}
+
+.app-fixed-header__mypage .material-icons-outlined {
+    font-size: 26px;
+    color: var(--primary-color);
+    line-height: 1;
+}
+
+/* メイン内ページタイトル（ヘッダーロゴと差し替え） */
+.app-page-header {
+    text-align: center;
+    margin: 24px 0 48px;
+}
+
+.app-page-heading {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--text-color);
+    line-height: 1.4;
+}
+
+.app-page-header .page-lead {
+    margin-top: 16px;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 300;
+    line-height: 1.8;
+    letter-spacing: 0.08em;
+}
+
+/* --- Layout --- */
+.container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px 100px;
+}
+
+.login-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+/* --- Card Styles --- */
+.login-card {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.card-content {
+    padding: 60px 50px;
+}
+
+.card-title {
+    font-family: var(--serif);
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.card-subtitle {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: var(--text-color);
+}
+
+.login-block .card-description {
+    margin-bottom: 24px;
+}
+
+.login-card--split .login-block + .auth-divider {
+    margin-top: 48px;
+}
+
+.card-description {
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    color: var(--text-light);
+    font-weight: 300;
+}
+
+.card-description.small {
+    font-size: 0.75rem;
+    margin-top: 20px;
+}
+
+/* --- Form Elements --- */
+.form-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-size: 0.75rem;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+input[type="tel"],
+input[type="password"] {
+    width: 100%;
+    padding: 15px 0;
+    border: none;
+    border-bottom: 1px solid var(--border-color);
+    font-family: var(--sans);
+    font-size: 1rem;
+    outline: none;
+    background: transparent;
+    transition: var(--transition);
+}
+
+#member-tel {
+    color: #888888;
+}
+
+#member-tel::placeholder {
+    color: #b8b8b8;
+}
+
+input:focus {
+    border-bottom-color: var(--primary-color);
+}
+
+.action-area {
+    margin-top: 40px;
+}
+
+/* --- Buttons --- */
+.btn {
+    display: block;
+    width: 100%;
+    padding: 20px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background: #4e3f63; /* Slightly darker */
+    letter-spacing: 0.25em;
+}
+
+/* --- Utilities --- */
+.form-footer {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.link-text {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    text-decoration: none;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.link-text:hover {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+.auth-divider {
+    margin: 40px 0 20px;
+    text-align: center;
+    position: relative;
+}
+
+.auth-divider::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: var(--border-color);
+    z-index: 1;
+}
+
+.auth-divider span {
+    background: var(--card-bg);
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+    font-size: 0.7rem;
+    color: #ccc;
+}
+
+.site-footer {
+    padding: 40px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+}
+
+.copyright {
+    font-size: 0.7rem;
+    color: #999;
+}
+
+/* --- Responsive (SP) --- */
+@media (max-width: 860px) {
+    body.has-fixed-app-header {
+        padding-top: 59px;
+    }
+
+    .app-fixed-header {
+        padding: 12px 16px;
+    }
+
+    .app-fixed-header__logo img {
+        height: 34px;
+    }
+
+    .app-page-header {
+        margin: 16px 0 36px;
+    }
+
+    .app-page-heading {
+        font-size: 26px;
+        letter-spacing: 0.15em;
+    }
+
+    .site-header {
+        padding: 40px 20px;
+    }
+    
+    .login-wrapper {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .card-content {
+        padding: 40px 30px;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+}

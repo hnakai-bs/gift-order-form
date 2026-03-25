@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ご注文完了 | ご進物お申込み</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/style.css">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/order.css">
+</head>
+<body class="has-fixed-app-header">
+
+    <header class="app-fixed-header">
+        <div class="app-fixed-header__inner">
+            <a href="order_list.html" class="app-fixed-header__logo">
+                <img src="../assets/img/logo.png" width="200" height="40" alt="ご進物お申込み">
+            </a>
+            <nav class="app-fixed-header__nav">
+                <a href="/app/apply_demo/htdocs/mypage/index.html" class="app-fixed-header__mypage">
+                    <span class="material-icons-outlined">account_circle</span>
+                    <span>マイページ</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="complete-message-card">
+            <div class="complete-icon">
+                <span class="material-icons-outlined">check_circle_outline</span>
+            </div>
+            
+            <h1 class="complete-title">ご注文を送信いたしました</h1>
+            
+            <div class="complete-body">
+                <p>この度はご注文いただき、誠にありがとうございます。<br>
+                ご入力いただいたメールアドレス宛に、注文確認の自動返信メールを送信いたしました。</p>
+                
+                <p class="complete-note">
+                    しばらく経ってもメールが届かない場合は、お手数ですが迷惑メールフォルダをご確認いただくか、<br class="pc-only">
+                    お問い合わせフォームよりご連絡ください。
+                </p>
+            </div>
+
+            <div class="complete-actions">
+                <a href="/app/apply_demo/htdocs/order/index.html" class="btn btn-primary btn-wide">
+                    注文一覧ページへ戻る
+                </a>
+               
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p class="copyright">&copy; ご進物お申込み All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

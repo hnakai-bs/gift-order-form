@@ -1,0 +1,107 @@
+/* 画面仕様書（spec.html） */
+
+.spec-doc {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.spec-doc__lead {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 300;
+    margin-bottom: 1.5em;
+}
+
+.spec-doc__lead + .spec-doc__lead {
+    margin-top: -0.5em;
+}
+
+.spec-section {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.spec-section:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+}
+
+.spec-doc h2 {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.spec-doc h3 {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin: 1.5rem 0 0.75rem;
+    letter-spacing: 0.08em;
+}
+
+.spec-doc h4 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin: 1.25rem 0 0.5rem;
+}
+
+.spec-doc p {
+    margin-bottom: 1em;
+    font-size: 0.9rem;
+}
+
+.spec-doc ul,
+.spec-doc ol {
+    margin: 0.75em 0 1em 1.25em;
+    font-size: 0.9rem;
+}
+
+.spec-doc li {
+    margin-bottom: 0.35em;
+}
+
+.spec-doc .spec-table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0 1.5rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+.spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-color);
+    background: var(--card-bg);
+}
+
+.spec-table th,
+.spec-table td {
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: top;
+    border: 1px solid var(--border-color);
+}
+
+.spec-table thead th {
+    background: rgba(100, 81, 127, 0.06);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.spec-doc__closing {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+.spec-doc strong {
+    font-weight: 500;
+}

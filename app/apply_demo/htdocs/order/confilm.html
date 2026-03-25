@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ご注文内容の確認 | ご進物お申込み</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/style.css">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/order.css">
+</head>
+<body class="has-fixed-app-header">
+
+    <header class="app-fixed-header">
+        <div class="app-fixed-header__inner">
+            <a href="order_list.html" class="app-fixed-header__logo">
+                <img src="../assets/img/logo.png" width="200" height="40" alt="ご進物お申込み">
+            </a>
+            <nav class="app-fixed-header__nav">
+                <a href="/app/apply_demo/htdocs/mypage/index.html" class="app-fixed-header__mypage">
+                    <span class="material-icons-outlined">account_circle</span>
+                    <span>マイページ</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container container--narrow">
+        <header class="app-page-header">
+            <h1 class="app-page-heading">ご注文内容の確認</h1>
+            <p class="page-lead">入力内容をご確認ください。修正が必要な場合は「変更する」から戻ることができます。</p>
+        </header>
+
+        <div class="confirm-content-wrapper">
+            
+            <section class="confirm-section">
+                <div class="confirm-section-header">
+                    <h2 class="confirm-section-title serif">お届け先情報</h2>
+                    <a href="/app/apply_demo/htdocs/order/reorder.html" class="btn-change">変更する</a>
+                </div>
+                <div class="confirm-data-card">
+                    <dl class="confirm-data-list">
+                        <div>
+                            <dt>宛名</dt>
+                            <dd class="serif">株式会社エービーシー 山田 太郎 様</dd>
+                        </div>
+                        <div>
+                            <dt>お届け先</dt>
+                            <dd>〒100-0001<br>東京都千代田区千代田1-1-1 〇〇ビル 10F</dd>
+                        </div>
+                        <div>
+                            <dt>電話番号</dt>
+                            <dd>03-1234-5678</dd>
+                        </div>
+                    </dl>
+                </div>
+            </section>
+
+            <section class="confirm-section">
+                <div class="confirm-section-header">
+                    <h2 class="confirm-section-title serif">ご注文商品</h2>
+                    <a href="/app/apply_demo/htdocs/order/reorder.html" class="btn-change">変更する</a>
+                </div>
+                <div class="confirm-data-card">
+                    <table class="confirm-product-table">
+                        <thead>
+                            <tr>
+                                <th>商品番号</th>
+                                <th>商品名</th>
+                                <th>数量</th>
+                                <th class="text-right">小計</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="product-id-tag">A-101</span></td>
+                                <td>プレミアムカタログギフト（和・山吹）</td>
+                                <td>1</td>
+                                <td class="text-right">5,500円</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="confirm-section">
+                <div class="confirm-section-header">
+                    <h2 class="confirm-section-title serif">お届け・お支払い方法</h2>
+                    <a href="/app/apply_demo/htdocs/order/reorder.html" class="btn-change">変更する</a>
+                </div>
+                <div class="confirm-data-card">
+                    <dl class="confirm-data-list">
+                        <div>
+                            <dt>お届け希望日</dt>
+                            <dd>2026年3月30日(月)</dd>
+                        </div>
+                        <div>
+                            <dt>お届け時間帯</dt>
+                            <dd>午前中</dd>
+                        </div>
+                        <div>
+                            <dt>お支払い方法</dt>
+                            <dd>銀行振込</dd>
+                        </div>
+                    </dl>
+                </div>
+            </section>
+
+            <section class="final-action-section">
+                <div class="summary-total-box">
+                    <div class="summary-total-rows">
+                        <div class="summary-total-row">
+                            <span>商品合計</span>
+                            <span>5,500円</span>
+                        </div>
+                        <div class="summary-total-row">
+                            <span>送料</span>
+                            <span>880円</span>
+                        </div>
+                        <div class="summary-total-row total">
+                            <span class="serif">お支払い合計（税込）</span>
+                            <span class="total-amount serif">6,380円</span>
+                        </div>
+                    </div>
+                    
+                    <div class="final-buttons">
+                        <a href="/app/apply_demo/htdocs/order/complete.html" class="btn btn-primary btn-submit">
+                            ご注文を確定し送信
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p class="copyright">&copy; ご進物お申込み All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

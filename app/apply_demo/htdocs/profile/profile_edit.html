@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登録情報の確認・追加 | ご進物お申込み</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/style.css">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/profile.css">
+</head>
+<body class="has-fixed-app-header">
+
+    <header class="app-fixed-header">
+        <div class="app-fixed-header__inner">
+            <a href="../order/index.html" class="app-fixed-header__logo">
+                <img src="../assets/img/logo.png" width="200" height="40" alt="ご進物お申込み">
+            </a>
+            <nav class="app-fixed-header__nav" aria-label="ユーティリティ">
+                <a href="/app/apply_demo/htdocs/mypage/index.html" class="app-fixed-header__mypage">
+                    <span class="material-icons-outlined" aria-hidden="true">account_circle</span>
+                    <span>マイページ</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <header class="app-page-header">
+            <h1 class="app-page-heading">登録情報の追加</h1>
+            <p class="page-lead">過去のご注文情報に基づき表示しています。<br>不足している情報の入力と、内容のご確認をお願いいたします。</p>
+        </header>
+
+        <section class="form-card">
+            <div class="card-content">
+                <form action="order_list.html" method="POST">
+                    
+                    <h3 class="form-section-title">貴社情報</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="company_name">会社名 <span class="required-dot"></span></label>
+                            <input type="text" id="company_name" name="company_name" value="株式会社サンプル" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company_kana">会社名（フリガナ） <span class="required-dot"></span></label>
+                            <input type="text" id="company_kana" name="company_kana" value="カブシキガイシャサンプル" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="department">部署・役職</label>
+                        <input type="text" id="department" name="department" value="営業本部 部長">
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="user_name">ご担当者氏名 <span class="required-dot"></span></label>
+                            <input type="text" id="user_name" name="user_name" value="山田 太郎" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_kana">ご担当者氏名（フリガナ） <span class="required-dot"></span></label>
+                            <input type="text" id="user_kana" name="user_kana" value="ヤマダ タロウ" required>
+                        </div>
+                    </div>
+
+                    <h3 class="form-section-title">ご連絡先・お届け先</h3>
+
+                    <div class="form-group">
+                        <label for="email">メールアドレス <span class="required-dot"></span></label>
+                        <input type="email" id="email" name="email" placeholder="example@sample.co.jp" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tel">電話番号 <span class="required-dot"></span></label>
+                        <input type="tel" id="tel" name="tel" value="0312345678" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group" style="flex: 0 0 30%;">
+                            <label for="zip">郵便番号 <span class="required-dot"></span></label>
+                            <input type="text" id="zip" name="zip" value="1000001" required>
+                        </div>
+                        <div class="form-group" style="flex: 1;">
+                            <label for="address">住所 <span class="required-dot"></span></label>
+                            <input type="text" id="address" name="address" value="東京都千代田区1-1-1 〇〇ビル5F 株式会社サンプル" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="industry">業界・業種</label>
+                        <select id="industry" name="industry">
+                            <option value="">選択してください</option>
+                            <option value="it">IT・通信</option>
+                            <option value="manufacturing" selected>製造業</option> <option value="construction">建設・不動産</option>
+                            <option value="service">サービス業</option>
+                            <option value="retail">小売・流通</option>
+                            <option value="other">その他</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">ログインパスワードの設定 <span class="required-dot"></span></label>
+                        <input type="password" id="password" name="password" placeholder="今後のログイン用パスワード（8文字以上）" required>
+                    </div>
+
+                    <div class="agreement-area">
+                        <label class="checkbox-container">
+                            <input type="checkbox" name="agree" required>
+                            <span class="checkmark"></span>
+                            <a href="#" target="_blank" class="link-text">利用規約</a>に同意して登録を完了する
+                        </label>
+                    </div>
+
+                    <div class="action-area center">
+                        <button type="submit" class="btn btn-primary btn-wide">登録を完了して次へ</button>
+                    </div>
+
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p class="copyright">&copy; ご進物お申込み All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注文一覧・クイックオーダー | ご進物お申込み</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/style.css">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/order.css">
+</head>
+<body class="has-fixed-app-header">
+
+    <header class="app-fixed-header">
+        <div class="app-fixed-header__inner">
+            <a href="index.html" class="app-fixed-header__logo">
+                <img src="../assets/img/logo.png" width="200" height="40" alt="ご進物お申込み">
+            </a>
+            <nav class="app-fixed-header__nav" aria-label="ユーティリティ">
+                <a href="/app/apply_demo/htdocs/mypage/index.html" class="app-fixed-header__mypage">
+                    <span class="material-icons-outlined" aria-hidden="true">account_circle</span>
+                    <span>マイページ</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <header class="app-page-header">
+            <h1 class="app-page-heading">ご進物のご注文</h1>
+        </header>
+        <div class="order-thumbnail" aria-hidden="true"></div>
+        <section class="quick-order-section">
+            <div class="section-inner section-inner--quickOrder">
+                <div>
+                    <h2 class="card-title card-title--quickOrder">ご注文の新規追加</h2>
+                    <p class="page-lead page-lead--quickOrder">カタログ掲載の商品番号を入力してお申し込みいただけます。</p>
+                </div>
+                <div class="action-area center action-area--quickOrder">
+                    <a href="/app/apply_demo/htdocs/order/new.html" class="btn btn-primary btn-wide">
+                        新規ご注文
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="history-section">
+            <h2 class="card-title card-title--quickOrder">注文履歴から再注文</h2>
+            <p class="page-lead page-lead--quickOrder">過去にお届けした内容と同じものを、そのまま再注文いただけます。</p>
+
+            <div class="order-history-list">
+                <table class="order-history-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">注文日</th>
+                            <th scope="col">宛名</th>
+                            <th scope="col">注文内容</th>
+                            <th scope="col" class="order-history-table__th-detail">詳細</th>
+                            <th scope="col">再注文</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="order-history-table__date">2023.12.20</td>
+                            <td class="order-history-table__dest">株式会社エービーシー 様</td>
+                            <td class="order-history-table__content">
+                                <details class="order-detail-accordion">
+                                    <summary class="order-detail-accordion__summary">
+                                        <span class="order-detail-accordion__summary-text">A-101（数量：1）</span>
+                                        <span class="material-icons-outlined order-detail-accordion__icon" aria-hidden="true">expand_more</span>
+                                    </summary>
+                                    <div class="order-detail-accordion__panel">
+                                        <p class="order-detail-accordion__body">
+                                            <span class="product-id">A-101</span>
+                                            <span class="product-qty">数量：1</span>
+                                        </p>
+                                    </div>
+                                </details>
+                            </td>
+                            <td class="order-history-table__detail">
+                                <button type="button" class="order-history-table__detail-btn js-order-detail-open"
+                                    data-detail-dest="株式会社エービーシー 山田 太郎 様"
+                                    data-detail-zip="100-0001"
+                                    data-detail-address="東京都千代田区千代田1-1-1 〇〇ビル 10F"
+                                    data-detail-tel="03-1234-5678"
+                                    data-detail-items='[{"code":"A-101","name":"プレミアムカタログギフト（和・山吹）","qty":"1","subtotal":"5,500円"}]'>詳細</button>
+                            </td>
+                            <td class="order-history-table__action">
+                                <a href="/app/apply_demo/htdocs/order/reorder.html" class="btn btn-primary order-history-table__reorder">同一内容で注文</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="order-history-table__date">2023.11.15</td>
+                            <td class="order-history-table__dest">サンプル商事株式会社 営業部 様</td>
+                            <td class="order-history-table__content">
+                                <details class="order-detail-accordion">
+                                    <summary class="order-detail-accordion__summary">
+                                        <span class="order-detail-accordion__summary-text">B-205（数量：2）</span>
+                                        <span class="material-icons-outlined order-detail-accordion__icon" aria-hidden="true">expand_more</span>
+                                    </summary>
+                                    <div class="order-detail-accordion__panel">
+                                        <p class="order-detail-accordion__body">
+                                            <span class="product-id">B-205</span>
+                                            <span class="product-qty">数量：2</span>
+                                        </p>
+                                    </div>
+                                </details>
+                            </td>
+                            <td class="order-history-table__detail">
+                                <button type="button" class="order-history-table__detail-btn js-order-detail-open"
+                                    data-detail-dest="サンプル商事株式会社 営業部 鈴木 花子 様"
+                                    data-detail-zip="530-0001"
+                                    data-detail-address="大阪府大阪市北区梅田2-4-9 サンプルビル 3F"
+                                    data-detail-tel="06-9876-5432"
+                                    data-detail-items='[{"code":"B-205","name":"カタログギフト「楓」","qty":"2","subtotal":"11,000円"}]'>詳細</button>
+                            </td>
+                            <td class="order-history-table__action">
+                                <a href="/app/apply_demo/htdocs/order/reorder.html" class="btn btn-primary order-history-table__reorder">同一内容で注文</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="order-history-table__date">2023.10.02</td>
+                            <td class="order-history-table__dest">田中建設株式会社 御中</td>
+                            <td class="order-history-table__content">
+                                <details class="order-detail-accordion">
+                                    <summary class="order-detail-accordion__summary">
+                                        <span class="order-detail-accordion__summary-text">S-500（数量：10）</span>
+                                        <span class="material-icons-outlined order-detail-accordion__icon" aria-hidden="true">expand_more</span>
+                                    </summary>
+                                    <div class="order-detail-accordion__panel">
+                                        <p class="order-detail-accordion__body">
+                                            <span class="product-id">S-500</span>
+                                            <span class="product-qty">数量：10</span>
+                                        </p>
+                                    </div>
+                                </details>
+                            </td>
+                            <td class="order-history-table__detail">
+                                <button type="button" class="order-history-table__detail-btn js-order-detail-open"
+                                    data-detail-dest="田中建設株式会社 御中"
+                                    data-detail-zip="460-0008"
+                                    data-detail-address="愛知県名古屋市中区栄3-6-1 建設会館ビル"
+                                    data-detail-tel="052-111-2222"
+                                    data-detail-items='[{"code":"S-500","name":"進物セット 特撰","qty":"10","subtotal":"220,000円"}]'>詳細</button>
+                            </td>
+                            <td class="order-history-table__action">
+                                <a href="/app/apply_demo/htdocs/order/reorder.html" class="btn btn-primary order-history-table__reorder">同一内容で注文</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="order-history-table__date">2023.08.19</td>
+                            <td class="order-history-table__dest">有限会社デジタルフューチャー 様</td>
+                            <td class="order-history-table__content">
+                                <details class="order-detail-accordion">
+                                    <summary class="order-detail-accordion__summary">
+                                        <span class="order-detail-accordion__summary-text">C-333（数量：1）</span>
+                                        <span class="material-icons-outlined order-detail-accordion__icon" aria-hidden="true">expand_more</span>
+                                    </summary>
+                                    <div class="order-detail-accordion__panel">
+                                        <p class="order-detail-accordion__body">
+                                            <span class="product-id">C-333</span>
+                                            <span class="product-qty">数量：1</span>
+                                        </p>
+                                    </div>
+                                </details>
+                            </td>
+                            <td class="order-history-table__detail">
+                                <button type="button" class="order-history-table__detail-btn js-order-detail-open"
+                                    data-detail-dest="有限会社デジタルフューチャー 佐藤 一郎 様"
+                                    data-detail-zip="150-0043"
+                                    data-detail-address="東京都渋谷区道玄坂1-2-3 デジタルプラザ 5F"
+                                    data-detail-tel="03-3333-4444"
+                                    data-detail-items='[{"code":"C-333","name":"のり詰め合わせ 極み","qty":"1","subtotal":"3,300円"}]'>詳細</button>
+                            </td>
+                            <td class="order-history-table__action">
+                                <a href="/app/apply_demo/htdocs/order/reorder.html" class="btn btn-primary order-history-table__reorder">同一内容で注文</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="order-history-table__date">2023.07.05</td>
+                            <td class="order-history-table__dest">株式会社グローバルシステム 様</td>
+                            <td class="order-history-table__content">
+                                <details class="order-detail-accordion">
+                                    <summary class="order-detail-accordion__summary">
+                                        <span class="order-detail-accordion__summary-text">A-102（数量：5）</span>
+                                        <span class="material-icons-outlined order-detail-accordion__icon" aria-hidden="true">expand_more</span>
+                                    </summary>
+                                    <div class="order-detail-accordion__panel">
+                                        <p class="order-detail-accordion__body">
+                                            <span class="product-id">A-102</span>
+                                            <span class="product-qty">数量：5</span>
+                                        </p>
+                                    </div>
+                                </details>
+                            </td>
+                            <td class="order-history-table__detail">
+                                <button type="button" class="order-history-table__detail-btn js-order-detail-open"
+                                    data-detail-dest="株式会社グローバルシステム 高橋 美咲 様"
+                                    data-detail-zip="141-0021"
+                                    data-detail-address="東京都品川区上大崎2-25-2 グローバルタワー 12F"
+                                    data-detail-tel="03-5555-6666"
+                                    data-detail-items='[{"code":"A-102","name":"プレミアムカタログギフト（洋・アイボリー）","qty":"5","subtotal":"27,500円"}]'>詳細</button>
+                            </td>
+                            <td class="order-history-table__action">
+                                <a href="/app/apply_demo/htdocs/order/reorder.html" class="btn btn-primary order-history-table__reorder">同一内容で注文</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p class="copyright">&copy; ご進物お申込み All Rights Reserved.</p>
+    </footer>
+
+    <div id="order-detail-modal" class="order-detail-modal" hidden aria-hidden="true">
+        <button type="button" class="order-detail-modal__backdrop js-order-detail-close" aria-label="閉じる"></button>
+        <div class="order-detail-modal__panel" role="dialog" aria-modal="true" aria-labelledby="order-detail-modal-heading">
+            <div class="order-detail-modal__header">
+                <h2 id="order-detail-modal-heading" class="order-detail-modal__title serif">注文詳細</h2>
+                <button type="button" class="order-detail-modal__close js-order-detail-close" aria-label="閉じる">
+                    <span class="material-icons-outlined" aria-hidden="true">close</span>
+                </button>
+            </div>
+            <div class="order-detail-modal__body">
+                <section class="setup-section order-detail-modal__section" aria-labelledby="order-detail-delivery-heading">
+                    <div class="setup-section-header">
+                        <h2 id="order-detail-delivery-heading" class="setup-section-title serif">お届け先情報</h2>
+                    </div>
+                    <div class="setup-card order-detail-readonly">
+                        <div class="form-group">
+                            <label class="order-detail-modal__label order-detail-modal__label--dest">宛名（会社名・お名前）</label>
+                            <p class="order-detail-readonly__text" id="order-detail-modal-dest"></p>
+                        </div>
+                        <div class="form-row order-detail-modal__addr-row">
+                            <div class="form-group order-detail-modal__zip-field">
+                                <label class="order-detail-modal__label order-detail-modal__label--zip">郵便番号</label>
+                                <p class="order-detail-readonly__text" id="order-detail-modal-zip"></p>
+                            </div>
+                            <div class="form-group flex-1">
+                                <label class="order-detail-modal__label order-detail-modal__label--address">住所</label>
+                                <p class="order-detail-readonly__text" id="order-detail-modal-address"></p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="order-detail-modal__label order-detail-modal__label--tel">電話番号</label>
+                            <p class="order-detail-readonly__text" id="order-detail-modal-tel"></p>
+                        </div>
+                    </div>
+                </section>
+                <section class="setup-section order-detail-modal__section" aria-labelledby="order-detail-items-heading">
+                    <div class="setup-section-header">
+                        <h2 id="order-detail-items-heading" class="setup-section-title serif">ご注文商品</h2>
+                    </div>
+                    <div class="setup-card">
+                        <div class="order-detail-modal__items-desktop">
+                            <table class="setup-product-table setup-product-table--readonly">
+                                <colgroup>
+                                    <col class="setup-product-col setup-product-col--code">
+                                    <col class="setup-product-col setup-product-col--name">
+                                    <col class="setup-product-col setup-product-col--qty">
+                                    <col class="setup-product-col setup-product-col--subtotal">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="setup-product-table__th-code">商品番号</th>
+                                        <th class="setup-product-table__th-name">商品名</th>
+                                        <th>数量</th>
+                                        <th>小計</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="order-detail-modal-items"></tbody>
+                            </table>
+                        </div>
+                        <ul class="order-detail-modal__items-mobile" id="order-detail-modal-items-list"></ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            var modal = document.getElementById('order-detail-modal');
+            if (!modal) return;
+
+            var destEl = document.getElementById('order-detail-modal-dest');
+            var zipEl = document.getElementById('order-detail-modal-zip');
+            var addressEl = document.getElementById('order-detail-modal-address');
+            var telEl = document.getElementById('order-detail-modal-tel');
+            var itemsBody = document.getElementById('order-detail-modal-items');
+            var itemsList = document.getElementById('order-detail-modal-items-list');
+            var lastFocus = null;
+
+            function escapeHtml(s) {
+                if (s == null) return '';
+                var div = document.createElement('div');
+                div.textContent = s;
+                return div.innerHTML;
+            }
+
+            function openModal(btn) {
+                lastFocus = document.activeElement;
+                destEl.textContent = btn.getAttribute('data-detail-dest') || '';
+                zipEl.textContent = btn.getAttribute('data-detail-zip') || '';
+                addressEl.textContent = btn.getAttribute('data-detail-address') || '';
+                telEl.textContent = btn.getAttribute('data-detail-tel') || '';
+
+                var items = [];
+                try {
+                    items = JSON.parse(btn.getAttribute('data-detail-items') || '[]');
+                } catch (e) {
+                    items = [];
+                }
+
+                itemsBody.innerHTML = '';
+                if (itemsList) itemsList.innerHTML = '';
+                items.forEach(function (row) {
+                    var tr = document.createElement('tr');
+                    tr.innerHTML =
+                        '<td><span class="product-id-tag">' + escapeHtml(row.code) + '</span></td>' +
+                        '<td class="product-name">' + escapeHtml(row.name) + '</td>' +
+                        '<td>' + escapeHtml(row.qty) + '</td>' +
+                        '<td>' + escapeHtml(row.subtotal) + '</td>';
+                    itemsBody.appendChild(tr);
+
+                    if (itemsList) {
+                        var li = document.createElement('li');
+                        li.className = 'order-detail-modal__item';
+                        li.innerHTML =
+                            '<dl class="order-detail-modal__item-dl">' +
+                            '<dt class="order-detail-modal__item-dt">商品番号</dt>' +
+                            '<dd class="order-detail-modal__item-dd"><span class="product-id-tag">' + escapeHtml(row.code) + '</span></dd>' +
+                            '<dt class="order-detail-modal__item-dt">商品名</dt>' +
+                            '<dd class="order-detail-modal__item-dd">' + escapeHtml(row.name) + '</dd>' +
+                            '<dt class="order-detail-modal__item-dt">数量</dt>' +
+                            '<dd class="order-detail-modal__item-dd">' + escapeHtml(row.qty) + '</dd>' +
+                            '<dt class="order-detail-modal__item-dt">小計</dt>' +
+                            '<dd class="order-detail-modal__item-dd">' + escapeHtml(row.subtotal) + '</dd>' +
+                            '</dl>';
+                        itemsList.appendChild(li);
+                    }
+                });
+
+                modal.hidden = false;
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('order-detail-modal-open');
+
+                var closeBtn = modal.querySelector('.order-detail-modal__close');
+                if (closeBtn) closeBtn.focus();
+            }
+
+            function closeModal() {
+                modal.hidden = true;
+                modal.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('order-detail-modal-open');
+                if (lastFocus && typeof lastFocus.focus === 'function') {
+                    lastFocus.focus();
+                }
+            }
+
+            document.addEventListener('click', function (e) {
+                var openBtn = e.target.closest('.js-order-detail-open');
+                if (openBtn) {
+                    e.preventDefault();
+                    openModal(openBtn);
+                    return;
+                }
+                if (e.target.closest('.js-order-detail-close')) {
+                    closeModal();
+                }
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && !modal.hidden) {
+                    closeModal();
+                }
+            });
+        })();
+    </script>
+
+</body>
+</html>

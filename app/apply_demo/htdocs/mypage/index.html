@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイページ | ご進物お申込み</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/style.css">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/mypage.css">
+</head>
+<body class="has-fixed-app-header">
+
+    <header class="app-fixed-header">
+        <div class="app-fixed-header__inner">
+            <a href="/app/apply_demo/htdocs/order/index.html" class="app-fixed-header__logo">
+                <img src="../assets/img/logo.png" width="200" height="40" alt="ご進物お申込み">
+            </a>
+            <nav class="app-fixed-header__nav" aria-label="ユーティリティ">
+                <a href="/app/apply_demo/htdocs/mypage/index.html" class="app-fixed-header__mypage" aria-current="page">
+                    <span class="material-icons-outlined" aria-hidden="true">account_circle</span>
+                    <span>マイページ</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container container--narrow">
+        <header class="app-page-header">
+            <h1 class="app-page-heading">マイページ</h1>
+            <p class="user-info-text serif">株式会社サンプル  山田 太郎 様</p>
+        </header>
+
+        <section class="mypage-list-section">
+            <ul class="mypage-nav-list">
+                <!-- <li>
+                    <a href="order_list.html" class="mypage-nav-item">
+                        <span class="item-label">注文履歴から再注文</span>
+                        <span class="material-icons-outlined">chevron_right</span>
+                    </a>
+                </li> -->
+                <li>
+                    <a href="../profile/profile_edit.html" class="mypage-nav-item">
+                        <span class="item-label">会員情報の確認・変更</span>
+                        <span class="material-icons-outlined">chevron_right</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="mypage-nav-item logout">
+                        <span class="item-label">ログアウト</span>
+                        <span class="material-icons-outlined">logout</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p class="copyright">&copy; ご進物お申込み All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>

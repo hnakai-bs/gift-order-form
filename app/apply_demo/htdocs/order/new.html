@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新規ご注文 | ご進物お申込み</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/style.css">
+    <link rel="stylesheet" href="/app/apply_demo/htdocs/assets/css/order.css">
+</head>
+<body class="has-fixed-app-header">
+
+    <header class="app-fixed-header">
+        <div class="app-fixed-header__inner">
+            <a href="index.html" class="app-fixed-header__logo">
+                <img src="../assets/img/logo.png" width="200" height="40" alt="ご進物お申込み">
+            </a>
+            <nav class="app-fixed-header__nav">
+                <a href="/app/apply_demo/htdocs/mypage/index.html" class="app-fixed-header__mypage">
+                    <span class="material-icons-outlined">account_circle</span>
+                    <span>マイページ</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <header class="app-page-header">
+            <h1 class="app-page-heading">新規ご注文</h1>
+            <p class="page-lead">宛名・お届け先・ご注文内容をご入力のうえ、ご注文いただけます。</p>
+        </header>
+
+        <form action="order_confirm.html" method="POST">
+            <div class="order-setup-grid">
+
+                <div class="setup-main">
+
+                    <section class="setup-section">
+                        <div class="setup-section-header">
+                            <h2 class="setup-section-title serif">お届け先情報</h2>
+                            <span class="edit-badge">編集可</span>
+                        </div>
+                        <div class="setup-card">
+                            <div class="form-group">
+                                <label>宛名（会社名・お名前）</label>
+                                <input type="text" name="dest_name" value="" class="input-underline" placeholder="例：株式会社〇〇 山田 太郎 様">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group" style="flex: 0 0 150px;">
+                                    <label>郵便番号</label>
+                                    <input type="text" name="zip" value="" class="input-underline" placeholder="例：100-0001">
+                                </div>
+                                <div class="form-group flex-1">
+                                    <label>住所</label>
+                                    <input type="text" name="address" value="" class="input-underline" placeholder="都道府県から番地・建物名まで">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>電話番号</label>
+                                <input type="tel" name="tel" value="" class="input-underline w-medium" placeholder="例：03-1234-5678">
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="setup-section">
+                        <div class="setup-section-header">
+                            <h2 class="setup-section-title serif">ご注文商品</h2>
+                        </div>
+                        <div class="setup-card">
+                            <table class="setup-product-table setup-product-table--editable">
+                                <colgroup>
+                                    <col class="setup-product-col setup-product-col--code">
+                                    <col class="setup-product-col setup-product-col--name">
+                                    <col class="setup-product-col setup-product-col--qty">
+                                    <col class="setup-product-col setup-product-col--subtotal">
+                                    <col class="setup-product-col setup-product-col--delete">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th class="setup-product-table__th-code">商品番号</th>
+                                        <th class="setup-product-table__th-name">商品名</th>
+                                        <th>数量</th>
+                                        <th>小計</th>
+                                        <th class="text-center">削除</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="text" name="product_code" value="" class="input-underline-mini" placeholder="例：A-101" aria-label="商品番号">
+                                        </td>
+                                        <td class="product-name">
+                                            <input type="text" name="product_name" value="" class="input-underline" placeholder="商品名" aria-label="商品名">
+                                        </td>
+                                        <td>
+                                            <div class="qty-control">
+                                                <button type="button" class="qty-stepper__btn" data-qty-step="-1" aria-label="数量を減らす">−</button>
+                                                <input type="number" name="quantity" value="1" min="1" class="qty-input" inputmode="numeric" aria-label="数量">
+                                                <button type="button" class="qty-stepper__btn" data-qty-step="1" aria-label="数量を増やす">+</button>
+                                            </div>
+                                        </td>
+                                        <td data-demo-subtotal>—</td>
+                                        <td class="text-center">
+                                            <button type="button" class="btn-delete">
+                                                <span class="material-icons-outlined">delete_outline</span>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="product-add-row">
+                                <p class="add-label">追加注文（商品番号入力）</p>
+                                <div class="add-inputs">
+                                    <input type="text" id="demo-add-product-code" placeholder="例：B-202" class="input-underline-mini" value="" aria-label="追加する商品番号">
+                                    <div class="qty-control qty-control--inline">
+                                        <button type="button" class="qty-stepper__btn" data-qty-step="-1" aria-label="数量を減らす">−</button>
+                                        <input type="number" name="add_quantity" value="1" min="1" class="qty-input" inputmode="numeric" aria-label="追加する数量">
+                                        <button type="button" class="qty-stepper__btn" data-qty-step="1" aria-label="数量を増やす">+</button>
+                                    </div>
+                                    <button type="button" class="btn-add-item">追加</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="setup-section">
+                        <h2 class="setup-section-title serif setup-section-title-delivery">お届け希望日時の指定</h2>
+                        <div class="setup-card">
+                            <div class="form-row">
+                                <div class="form-group flex-1">
+                                    <label>お届け希望日</label>
+                                    <input type="date" name="delivery_date" value="" class="input-underline">
+                                </div>
+                                <div class="form-group flex-1">
+                                    <label>お届け時間帯</label>
+                                    <select name="delivery_time" class="input-underline">
+                                        <option>指定なし</option>
+                                        <option>午前中</option>
+                                        <option>14時〜16時</option>
+                                        <option>16時〜18時</option>
+                                        <option>18時〜20時</option>
+                                        <option>19時〜21時</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="setup-sidebar">
+                    <div class="summary-card">
+                        <h3 class="summary-title serif">お支払い合計</h3>
+                        <div class="summary-row">
+                            <span>商品合計</span>
+                            <span data-demo-summary="products">0円</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>送料</span>
+                            <span data-demo-summary="shipping">—</span>
+                        </div>
+                        <div class="summary-total">
+                            <span class="total-label">合計金額（税込）</span>
+                            <span class="total-amount" data-demo-summary="grand">—</span>
+                        </div>
+
+                        <fieldset class="summary-payment-fieldset">
+                            <legend class="summary-payment-legend serif">お支払い方法を選択する</legend>
+                            <div class="summary-payment-options">
+                                <label class="summary-payment-label">
+                                    <input type="radio" name="payment_method" value="bank_transfer">
+                                    <span>銀行振込</span>
+                                </label>
+                                <label class="summary-payment-label">
+                                    <input type="radio" name="payment_method" value="cod">
+                                    <span>代金引換</span>
+                                </label>
+                            </div>
+                        </fieldset>
+
+                        <div class="summary-actions">
+                            <a href="/app/apply_demo/htdocs/order/confilm.html" class="btn btn-primary btn-full">確認画面へ進む</a>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+        </form>
+    </main>
+
+    <footer class="site-footer">
+        <p class="copyright">&copy; ご進物お申込み All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        (function () {
+            var DEMO_CATALOG = {
+                'A-101': { name: 'プレミアムカタログギフト（和・山吹）', unitPrice: 5500 },
+                'B-202': { name: 'スタンダードカタログギフト（洋・紺）', unitPrice: 3300 },
+                'C-303': { name: 'デラックス詰合せ（海苔・佃煮）', unitPrice: 8800 },
+            };
+            var DEMO_SHIPPING = 880;
+
+            function normCode(s) {
+                return String(s).trim().replace(/\s+/g, '').toUpperCase();
+            }
+
+            function formatYen(n) {
+                return n.toLocaleString('ja-JP') + '円';
+            }
+
+            var productTbody = document.querySelector('.setup-product-table tbody');
+            var elSummaryProducts = document.querySelector('[data-demo-summary="products"]');
+            var elSummaryShipping = document.querySelector('[data-demo-summary="shipping"]');
+            var elSummaryGrand = document.querySelector('[data-demo-summary="grand"]');
+
+            function refreshProductLine(tr) {
+                if (!tr) return;
+                var codeInput = tr.querySelector('input[name="product_code"]');
+                var nameInput = tr.querySelector('input[name="product_name"]');
+                var qtyInput = tr.querySelector('.qty-input');
+                var subEl = tr.querySelector('[data-demo-subtotal]');
+                if (!codeInput || !nameInput || !subEl) return;
+                var raw = codeInput.value.trim();
+                var item = raw ? DEMO_CATALOG[normCode(raw)] : null;
+                var qty = parseInt(qtyInput && qtyInput.value, 10);
+                if (isNaN(qty) || qty < 1) qty = 1;
+                if (item) {
+                    nameInput.value = item.name;
+                    subEl.textContent = formatYen(item.unitPrice * qty);
+                    tr.setAttribute('data-demo-line-total', String(item.unitPrice * qty));
+                } else {
+                    nameInput.value = '';
+                    subEl.textContent = '—';
+                    tr.setAttribute('data-demo-line-total', '0');
+                }
+                refreshOrderSummary();
+            }
+
+            function refreshOrderSummary() {
+                if (!elSummaryProducts || !productTbody) return;
+                var total = 0;
+                productTbody.querySelectorAll('tr').forEach(function (tr) {
+                    var n = parseInt(tr.getAttribute('data-demo-line-total'), 10);
+                    if (!isNaN(n)) total += n;
+                });
+                elSummaryProducts.textContent = formatYen(total);
+                if (elSummaryShipping) {
+                    elSummaryShipping.textContent = total > 0 ? formatYen(DEMO_SHIPPING) : '—';
+                }
+                if (elSummaryGrand) {
+                    elSummaryGrand.textContent = total > 0 ? formatYen(total + DEMO_SHIPPING) : '—';
+                }
+            }
+
+            function clearRow(tr) {
+                var codeInput = tr.querySelector('input[name="product_code"]');
+                var nameInput = tr.querySelector('input[name="product_name"]');
+                var qtyInput = tr.querySelector('.qty-input');
+                var subEl = tr.querySelector('[data-demo-subtotal]');
+                if (codeInput) codeInput.value = '';
+                if (nameInput) nameInput.value = '';
+                if (qtyInput) qtyInput.value = '1';
+                if (subEl) subEl.textContent = '—';
+                tr.setAttribute('data-demo-line-total', '0');
+            }
+
+            function addProductRowFromForm() {
+                var addCode = document.getElementById('demo-add-product-code');
+                var addQtyInput = document.querySelector('.product-add-row .qty-input');
+                if (!productTbody || !addCode) return;
+                var code = addCode.value.trim();
+                if (!code) return;
+                var qty = parseInt(addQtyInput && addQtyInput.value, 10);
+                if (isNaN(qty) || qty < 1) qty = 1;
+                var template = productTbody.querySelector('tr');
+                if (!template) return;
+                var tr = template.cloneNode(true);
+                clearRow(tr);
+                var codeInput = tr.querySelector('input[name="product_code"]');
+                var qtyInput = tr.querySelector('.qty-input');
+                if (codeInput) codeInput.value = code;
+                if (qtyInput) qtyInput.value = String(qty);
+                productTbody.appendChild(tr);
+                refreshProductLine(tr);
+                addCode.value = '';
+                if (addQtyInput) addQtyInput.value = '1';
+            }
+
+            if (productTbody) {
+                productTbody.querySelectorAll('tr').forEach(function (tr) {
+                    tr.setAttribute('data-demo-line-total', '0');
+                });
+
+                productTbody.addEventListener('input', function (e) {
+                    var el = e.target;
+                    if (el.matches('input[name="product_code"], input[name="product_name"], .qty-input')) {
+                        refreshProductLine(el.closest('tr'));
+                    }
+                });
+
+                productTbody.addEventListener('click', function (e) {
+                    var del = e.target.closest('.btn-delete');
+                    if (!del) return;
+                    var tr = del.closest('tr');
+                    if (!tr || !productTbody.contains(tr)) return;
+                    var rows = productTbody.querySelectorAll('tr');
+                    if (rows.length <= 1) {
+                        clearRow(tr);
+                        refreshOrderSummary();
+                    } else {
+                        tr.remove();
+                        refreshOrderSummary();
+                    }
+                });
+            }
+
+            document.addEventListener('click', function (e) {
+                if (e.target.closest('.btn-add-item')) {
+                    addProductRowFromForm();
+                    return;
+                }
+                var btn = e.target.closest('.qty-stepper__btn');
+                if (!btn) return;
+                var wrap = btn.closest('.qty-control');
+                if (!wrap) return;
+                var input = wrap.querySelector('.qty-input');
+                if (!input) return;
+                var step = parseInt(btn.getAttribute('data-qty-step'), 10);
+                if (isNaN(step)) return;
+                var min = parseInt(input.getAttribute('min'), 10);
+                if (isNaN(min) || min < 1) min = 1;
+                var v = parseInt(input.value, 10);
+                if (isNaN(v)) v = min;
+                v += step;
+                if (v < min) v = min;
+                input.value = String(v);
+                var tr = btn.closest('.setup-product-table tbody tr');
+                if (tr) refreshProductLine(tr);
+            });
+
+            refreshOrderSummary();
+        })();
+    </script>
+</body>
+</html>
