@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ログイン | 法人カタログギフト</title>
+    <title>ログイン | ご進物お申込み</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
@@ -17,12 +17,6 @@
             <a href="../order/index.html" class="app-fixed-header__logo">
                 <img src="../assets/img/logo.png" width="200" height="40" alt="ご進物お申込み">
             </a>
-            <nav class="app-fixed-header__nav" aria-label="ユーティリティ">
-                <a href="../mypage/index.html" class="app-fixed-header__mypage">
-                    <span class="material-icons-outlined" aria-hidden="true">account_circle</span>
-                    <span>マイページ</span>
-                </a>
-            </nav>
         </div>
     </header>
 
@@ -36,7 +30,7 @@
                 <div class="card-content">
                     <h2 class="card-title">初めてご利用の方</h2>
                     <p class="card-description">
-                        お手元のカタログからお申し込みいただくには、まず会員登録（送り主情報の登録）をお願いいたします。
+                        はじめてご利用の方は、会員登録にお進みください。お届け先などの情報をご登録いただきます。
                     </p>
                     <div class="action-area">
                         <a href="../profile/index.html" class="btn btn-primary">新規会員登録へ</a>
@@ -46,12 +40,11 @@
 
             <section class="login-card login-card--split">
                 <div class="card-content">
-                    <h2 class="card-title">会員様・過去にご注文いただいた方</h2>
+                    <h2 class="card-title">会員の方</h2>
 
                     <div class="login-block">
-                        <!-- <h3 class="card-subtitle">会員様</h3> -->
                         <p class="card-description">
-                            過去にご注文いただいた方は、ご登録の電話番号と、カタログに記載されているパスワードでログインしてください。
+                            ご登録の電話番号と、会員登録時に設定したパスワードでログインしてください。
                         </p>
                         <form action="#" method="POST" class="login-form" onsubmit="event.preventDefault(); window.location.href='../order/index.html';">
                             <div class="form-group">
@@ -64,9 +57,6 @@
                             </div>
                             <div class="action-area">
                                 <button type="submit" class="btn btn-primary">ログイン</button>
-                            </div>
-                            <div class="form-footer">
-                                <a href="#" class="link-text">パスワードをお忘れの方はこちら</a>
                             </div>
                         </form>
                     </div>

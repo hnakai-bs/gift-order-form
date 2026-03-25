@@ -73,7 +73,8 @@
                             <table class="setup-product-table setup-product-table--editable">
                                 <colgroup>
                                     <col class="setup-product-col setup-product-col--code">
-                                    <col class="setup-product-col setup-product-col--name">
+                                    <col class="setup-product-col setup-product-col--confirm">
+                                    <col class="setup-product-col setup-product-col--unit">
                                     <col class="setup-product-col setup-product-col--qty">
                                     <col class="setup-product-col setup-product-col--subtotal">
                                     <col class="setup-product-col setup-product-col--delete">
@@ -81,7 +82,8 @@
                                 <thead>
                                     <tr>
                                         <th class="setup-product-table__th-code">商品番号</th>
-                                        <th class="setup-product-table__th-name">商品名</th>
+                                        <th class="setup-product-table__th-confirm text-center">確認</th>
+                                        <th>商品単価</th>
                                         <th>数量</th>
                                         <th>小計</th>
                                         <th class="text-center">削除</th>
@@ -92,8 +94,11 @@
                                         <td>
                                             <input type="text" name="product_code" value="" class="input-underline-mini" placeholder="例：A-101" aria-label="商品番号">
                                         </td>
-                                        <td class="product-name">
-                                            <input type="text" name="product_name" value="" class="input-underline" placeholder="商品名" aria-label="商品名">
+                                        <td class="text-center">
+                                            <button type="button" class="btn-product-confirm">確認</button>
+                                        </td>
+                                        <td>
+                                            <span class="product-unit-display" data-demo-unit-display>—</span>
                                         </td>
                                         <td>
                                             <div class="qty-control">
@@ -116,11 +121,14 @@
                                 <p class="add-label">追加注文（商品番号入力）</p>
                                 <div class="add-inputs">
                                     <input type="text" id="demo-add-product-code" placeholder="例：B-202" class="input-underline-mini" value="" aria-label="追加する商品番号">
+                                    <button type="button" class="btn-product-confirm" id="demo-add-product-confirm" aria-label="商品番号を確認">確認</button>
+                                    <span class="add-line-unit-preview" data-demo-add-unit aria-live="polite">—</span>
                                     <div class="qty-control qty-control--inline">
                                         <button type="button" class="qty-stepper__btn" data-qty-step="-1" aria-label="数量を減らす">−</button>
                                         <input type="number" name="add_quantity" value="1" min="1" class="qty-input" inputmode="numeric" aria-label="追加する数量">
                                         <button type="button" class="qty-stepper__btn" data-qty-step="1" aria-label="数量を増やす">+</button>
                                     </div>
+                                    <span class="add-line-subtotal-preview" data-demo-add-subtotal aria-live="polite">—</span>
                                     <button type="button" class="btn-add-item">追加</button>
                                 </div>
                             </div>
@@ -197,11 +205,8 @@
 
     <script>
         (function () {
-            var DEMO_CATALOG = {
-                'A-101': { name: 'プレミアムカタログギフト（和・山吹）', unitPrice: 5500 },
-                'B-202': { name: 'スタンダードカタログギフト（洋・紺）', unitPrice: 3300 },
-                'C-303': { name: 'デラックス詰合せ（海苔・佃煮）', unitPrice: 8800 },
-            };
+            /* デモ：商品番号が入力されていれば常にこの単価で計算 */
+            var DEMO_UNIT_PRICE = 2000;
             var DEMO_SHIPPING = 880;
 
             function normCode(s) {
@@ -216,28 +221,53 @@
             var elSummaryProducts = document.querySelector('[data-demo-summary="products"]');
             var elSummaryShipping = document.querySelector('[data-demo-summary="shipping"]');
             var elSummaryGrand = document.querySelector('[data-demo-summary="grand"]');
+            var addCodeInput = document.getElementById('demo-add-product-code');
+            var addRowEl = document.querySelector('.product-add-row');
+            var addSubtotalPreview = document.querySelector('[data-demo-add-subtotal]');
+            var addUnitPreview = document.querySelector('[data-demo-add-unit]');
+            var addRowPending = null;
 
-            function refreshProductLine(tr) {
+            function parseUnitPrice(tr) {
+                var v = tr.getAttribute('data-demo-unit-price');
+                if (v == null || v === '') return NaN;
+                return parseInt(v, 10);
+            }
+
+            function setUnitPrice(tr, n) {
                 if (!tr) return;
-                var codeInput = tr.querySelector('input[name="product_code"]');
-                var nameInput = tr.querySelector('input[name="product_name"]');
+                if (isNaN(n) || n <= 0) tr.removeAttribute('data-demo-unit-price');
+                else tr.setAttribute('data-demo-unit-price', String(n));
+            }
+
+            function refreshLineSubtotal(tr) {
+                if (!tr) return;
                 var qtyInput = tr.querySelector('.qty-input');
                 var subEl = tr.querySelector('[data-demo-subtotal]');
-                if (!codeInput || !nameInput || !subEl) return;
-                var raw = codeInput.value.trim();
-                var item = raw ? DEMO_CATALOG[normCode(raw)] : null;
+                var unitEl = tr.querySelector('[data-demo-unit-display]');
+                if (!subEl) return;
+                var unit = parseUnitPrice(tr);
                 var qty = parseInt(qtyInput && qtyInput.value, 10);
                 if (isNaN(qty) || qty < 1) qty = 1;
-                if (item) {
-                    nameInput.value = item.name;
-                    subEl.textContent = formatYen(item.unitPrice * qty);
-                    tr.setAttribute('data-demo-line-total', String(item.unitPrice * qty));
+                if (unitEl) {
+                    unitEl.textContent = !isNaN(unit) && unit > 0 ? formatYen(unit) : '—';
+                }
+                if (!isNaN(unit) && unit > 0) {
+                    subEl.textContent = formatYen(unit * qty);
+                    tr.setAttribute('data-demo-line-total', String(unit * qty));
                 } else {
-                    nameInput.value = '';
                     subEl.textContent = '—';
                     tr.setAttribute('data-demo-line-total', '0');
                 }
                 refreshOrderSummary();
+            }
+
+            function confirmTableRow(tr) {
+                var codeInput = tr.querySelector('input[name="product_code"]');
+                if (!codeInput) return;
+                var raw = codeInput.value.trim();
+                if (raw) setUnitPrice(tr, DEMO_UNIT_PRICE);
+                else setUnitPrice(tr, NaN);
+                refreshLineSubtotal(tr);
             }
 
             function refreshOrderSummary() {
@@ -258,22 +288,41 @@
 
             function clearRow(tr) {
                 var codeInput = tr.querySelector('input[name="product_code"]');
-                var nameInput = tr.querySelector('input[name="product_name"]');
                 var qtyInput = tr.querySelector('.qty-input');
                 var subEl = tr.querySelector('[data-demo-subtotal]');
                 if (codeInput) codeInput.value = '';
-                if (nameInput) nameInput.value = '';
                 if (qtyInput) qtyInput.value = '1';
                 if (subEl) subEl.textContent = '—';
+                var unitEl = tr.querySelector('[data-demo-unit-display]');
+                if (unitEl) unitEl.textContent = '—';
+                setUnitPrice(tr, NaN);
                 tr.setAttribute('data-demo-line-total', '0');
             }
 
+            function updateAddPreview() {
+                if (!addSubtotalPreview || !addRowPending || !addCodeInput || !addRowEl) return;
+                var raw = addCodeInput.value.trim();
+                if (normCode(raw) !== addRowPending.normKey) {
+                    addSubtotalPreview.textContent = '—';
+                    if (addUnitPreview) addUnitPreview.textContent = '—';
+                    return;
+                }
+                var qtyInput = addRowEl.querySelector('.qty-input');
+                var qty = parseInt(qtyInput && qtyInput.value, 10);
+                if (isNaN(qty) || qty < 1) qty = 1;
+                if (addUnitPreview) addUnitPreview.textContent = formatYen(addRowPending.unitPrice);
+                addSubtotalPreview.textContent = formatYen(addRowPending.unitPrice * qty);
+            }
+
             function addProductRowFromForm() {
-                var addCode = document.getElementById('demo-add-product-code');
-                var addQtyInput = document.querySelector('.product-add-row .qty-input');
-                if (!productTbody || !addCode) return;
-                var code = addCode.value.trim();
+                var addQtyInput = addRowEl && addRowEl.querySelector('.qty-input');
+                if (!productTbody || !addCodeInput) return;
+                var code = addCodeInput.value.trim();
                 if (!code) return;
+                if (!addRowPending || addRowPending.normKey !== normCode(code)) {
+                    window.alert('商品番号を入力のうえ、「確認」を押してください。');
+                    return;
+                }
                 var qty = parseInt(addQtyInput && addQtyInput.value, 10);
                 if (isNaN(qty) || qty < 1) qty = 1;
                 var template = productTbody.querySelector('tr');
@@ -284,21 +333,45 @@
                 var qtyInput = tr.querySelector('.qty-input');
                 if (codeInput) codeInput.value = code;
                 if (qtyInput) qtyInput.value = String(qty);
+                setUnitPrice(tr, addRowPending.unitPrice);
+                refreshLineSubtotal(tr);
                 productTbody.appendChild(tr);
-                refreshProductLine(tr);
-                addCode.value = '';
+                addCodeInput.value = '';
+                addRowPending = null;
+                if (addSubtotalPreview) addSubtotalPreview.textContent = '—';
+                if (addUnitPreview) addUnitPreview.textContent = '—';
                 if (addQtyInput) addQtyInput.value = '1';
+            }
+
+            function initPrefilledRows() {
+                if (!productTbody) return;
+                productTbody.querySelectorAll('tr').forEach(function (tr) {
+                    var codeInput = tr.querySelector('input[name="product_code"]');
+                    if (!codeInput || !codeInput.value.trim()) {
+                        setUnitPrice(tr, NaN);
+                        refreshLineSubtotal(tr);
+                        return;
+                    }
+                    setUnitPrice(tr, DEMO_UNIT_PRICE);
+                    refreshLineSubtotal(tr);
+                });
             }
 
             if (productTbody) {
                 productTbody.querySelectorAll('tr').forEach(function (tr) {
-                    tr.setAttribute('data-demo-line-total', '0');
+                    if (!tr.getAttribute('data-demo-line-total')) tr.setAttribute('data-demo-line-total', '0');
                 });
 
                 productTbody.addEventListener('input', function (e) {
                     var el = e.target;
-                    if (el.matches('input[name="product_code"], input[name="product_name"], .qty-input')) {
-                        refreshProductLine(el.closest('tr'));
+                    var tr = el.closest('tr');
+                    if (!tr || !productTbody.contains(tr)) return;
+                    if (el.matches('input[name="product_code"]')) {
+                        setUnitPrice(tr, NaN);
+                        refreshLineSubtotal(tr);
+                    }
+                    if (el.matches('.qty-input')) {
+                        refreshLineSubtotal(tr);
                     }
                 });
 
@@ -318,11 +391,47 @@
                 });
             }
 
+            if (addCodeInput) {
+                addCodeInput.addEventListener('input', function () {
+                    addRowPending = null;
+                    if (addSubtotalPreview) addSubtotalPreview.textContent = '—';
+                    if (addUnitPreview) addUnitPreview.textContent = '—';
+                });
+            }
+
+            if (addRowEl) {
+                addRowEl.addEventListener('input', function (e) {
+                    if (e.target.matches('.qty-input')) updateAddPreview();
+                });
+            }
+
             document.addEventListener('click', function (e) {
+                var confirmBtn = e.target.closest('.btn-product-confirm');
+                if (confirmBtn) {
+                    if (confirmBtn.closest('.product-add-row')) {
+                        var raw = addCodeInput && addCodeInput.value.trim();
+                        if (raw) {
+                            addRowPending = { normKey: normCode(raw), unitPrice: DEMO_UNIT_PRICE };
+                            updateAddPreview();
+                        } else {
+                            addRowPending = null;
+                            if (addSubtotalPreview) addSubtotalPreview.textContent = '—';
+                            if (addUnitPreview) addUnitPreview.textContent = '—';
+                        }
+                        return;
+                    }
+                    var tr = confirmBtn.closest('tbody tr');
+                    if (tr && productTbody && productTbody.contains(tr)) {
+                        confirmTableRow(tr);
+                    }
+                    return;
+                }
+
                 if (e.target.closest('.btn-add-item')) {
                     addProductRowFromForm();
                     return;
                 }
+
                 var btn = e.target.closest('.qty-stepper__btn');
                 if (!btn) return;
                 var wrap = btn.closest('.qty-control');
@@ -339,9 +448,11 @@
                 if (v < min) v = min;
                 input.value = String(v);
                 var tr = btn.closest('.setup-product-table tbody tr');
-                if (tr) refreshProductLine(tr);
+                if (tr) refreshLineSubtotal(tr);
+                if (addRowEl && addRowEl.contains(btn)) updateAddPreview();
             });
 
+            initPrefilledRows();
             refreshOrderSummary();
         })();
     </script>

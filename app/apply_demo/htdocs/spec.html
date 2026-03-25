@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>画面仕様書 | ご進物お申込み</title>
+    <title>ご進物申込・申し込みシステム 見積もり前提条件 | ご進物お申込み</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
@@ -29,7 +29,7 @@
 
     <main class="container">
         <header class="app-page-header">
-            <h1 class="app-page-heading">ご進物申込・申し込み確認 画面仕様書</h1>
+            <h1 class="app-page-heading">ご進物申込・申し込みシステム<br><span class="spec-page-heading__sub">見積もり前提条件</span></h1>
         </header>
 
         <article class="spec-doc">
@@ -55,22 +55,17 @@
                     <li>申込日</li>
                     <li>商品情報（品番・数量・単価など）</li>
                     <li>配送先情報（宛名・住所など）</li>
-                    <li>配送希望日</li>
+                    <li>お届け希望日時（<strong>第一希望〜第三希望</strong>まで。各希望ごとに日付・時間帯を想定）</li>
                     <li>決済方法</li>
                 </ul>
                 <p>フォーマットの詳細については、別途ご提示させていただく予定です。</p>
-                <p>なお、本構想では以下の機能は対象外と想定しています。</p>
-                <ul>
-                    <li>管理画面の構築</li>
-                    <li>在庫管理</li>
-                    <li>商品管理</li>
-                </ul>
-                <p>あくまで、<strong>紙の申込用紙を電子化するためのシンプルな申し込み機能</strong>を想定しています。</p>
+                <p>まずは<strong>ミニマムな機能でオンライン申込をスタート</strong>し、運用しながら必要な拡張は段階的に検討する方針です。運用者向けの<strong>管理画面（ログイン・ユーザー管理・申込管理）</strong>も今回の対象に含めます。在庫の自動管理や発送オペレーションまでをシステムで完結させることは、初期スコープには含めず、必要に応じて今後のフェーズでご相談いただく想定です。</p>
             </section>
 
             <section class="spec-section" id="s2" aria-labelledby="heading-s2">
-                <h2 id="heading-s2">2. 画面構成</h2>
-                <p>おおむね次の画面・導線で構成されます。</p>
+                <h2 id="heading-s2">2. ユーザーの画面構成</h2>
+                <p>お申込みを行う会員（利用者）向けの画面・導線は、おおむね次のとおりです。</p>
+                <p>申込における<strong>お届け希望日時</strong>は、<strong>第一希望から第三希望まで</strong>取得できる想定とします（各希望は日付・時間帯の組み合わせを想定）。</p>
                 <div class="spec-table-wrap">
                     <table class="spec-table">
                         <thead>
@@ -82,39 +77,43 @@
                         <tbody>
                             <tr>
                                 <td>ログイン</td>
-                                <td>会員ログイン（電話番号・パスワード）、過去注文者向け仮パスワード発行、新規会員登録への導線</td>
+                                <td>会員ログイン（電話番号・パスワード）、新規会員登録への導線</td>
                             </tr>
                             <tr>
                                 <td>新規会員登録</td>
-                                <td>送り主（貴社）情報・連絡先の登録</td>
+                                <td>氏名・連絡先・ログインパスワード等の初回登録</td>
                             </tr>
                             <tr>
                                 <td>登録情報の追加</td>
-                                <td>過去注文等に基づく不足情報の入力・確認</td>
+                                <td>登録済み会員の情報追加・更新</td>
                             </tr>
                             <tr>
-                                <td>ご注文一覧・クイックオーダー</td>
-                                <td>新規ご注文への導線、注文履歴一覧・詳細（モーダル等）・再注文、マイページへの導線</td>
+                                <td>ご注文一覧</td>
+                                <td>ご注文履歴の一覧表示、新規ご注文・再注文・マイページ等への導線</td>
+                            </tr>
+                            <tr>
+                                <td>クイックオーダー</td>
+                                <td>リピート注文等のショートカット導線</td>
                             </tr>
                             <tr>
                                 <td>新規ご注文</td>
-                                <td>お届け先・商品・お届け希望日時・お支払い方法の入力、確認画面へ</td>
+                                <td>お届け先・商品・<strong>お届け希望日時（第三希望まで）</strong>・お支払いの入力</td>
                             </tr>
                             <tr>
                                 <td>同一内容でのご注文</td>
-                                <td>お届け先・商品・お届け希望日時の編集、合計表示、お支払い方法の選択、確認画面へ</td>
+                                <td>過去の注文内容を参照した再注文の入力</td>
                             </tr>
                             <tr>
-                                <td>ご注文内容の確認</td>
-                                <td>入力内容の確認、確定送信で完了画面へ</td>
+                                <td>確認</td>
+                                <td>申込内容の最終確認</td>
                             </tr>
                             <tr>
-                                <td>ご注文完了</td>
-                                <td>送信完了の案内、自動返信メールの案内、注文一覧へ戻る導線</td>
+                                <td>完了</td>
+                                <td>送信完了・完了メッセージの表示</td>
                             </tr>
                             <tr>
                                 <td>マイページ</td>
-                                <td>会員情報の確認・変更・ログアウトなどのメニュー</td>
+                                <td>会員メニュー（確認・変更・ログアウト等）</td>
                             </tr>
                         </tbody>
                     </table>
@@ -122,151 +121,56 @@
             </section>
 
             <section class="spec-section" id="s3" aria-labelledby="heading-s3">
-                <h2 id="heading-s3">3. ログイン・会員</h2>
-
-                <h3>ログイン</h3>
-                <ul>
-                    <li><strong>初めてご利用の方</strong>：新規会員登録へ誘導。</li>
-                    <li><strong>会員様</strong>：登録の電話番号とパスワードでログイン。</li>
-                    <li><strong>過去にご注文いただいた方</strong>：電話番号を入力し「仮パスワードを発行」→ 発行されたパスワードで会員ログインする流れを想定。</li>
-                </ul>
-
-                <h3>新規会員登録・登録情報の追加</h3>
-                <p><strong>法人（貴社）向け</strong>の項目構成を想定します。</p>
-
-                <h4>主な入力項目</h4>
-                <ul>
-                    <li>会社名、会社名（フリガナ）</li>
-                    <li>部署・役職</li>
-                    <li>ご担当者氏名、ご担当者氏名（フリガナ）</li>
-                    <li>メールアドレス</li>
-                    <li>電話番号（ログインIDとして使用する旨の表記）</li>
-                    <li>郵便番号、住所</li>
-                    <li>業界・業種（選択）</li>
-                    <li>ログインパスワード</li>
-                    <li>利用規約への同意</li>
-                </ul>
-                <p>登録情報の追加画面では、過去のご注文情報に基づき表示し、不足分の入力・パスワード設定を行う想定の文言とします。</p>
-            </section>
-
-            <section class="spec-section" id="s4" aria-labelledby="heading-s4">
-                <h2 id="heading-s4">4. ご注文一覧・履歴</h2>
-
-                <h3>機能</h3>
-                <ul>
-                    <li><strong>ご注文の新規追加</strong>：カタログ掲載の商品番号を入力して申し込む。</li>
-                    <li><strong>注文履歴から再注文</strong>：一覧に注文日・宛名・注文内容（展開表示）・詳細・「同一内容で注文」。</li>
-                    <li><strong>マイページ</strong>：ヘッダー等から遷移可能。</li>
-                </ul>
-
-                <h3>注文詳細（一覧上の詳細表示）</h3>
-                <ul>
-                    <li>お届け先：宛名、郵便番号、住所、電話番号</li>
-                    <li>ご注文商品：商品番号、商品名、数量、小計</li>
-                </ul>
-            </section>
-
-            <section class="spec-section" id="s5" aria-labelledby="heading-s5">
-                <h2 id="heading-s5">5. 新規ご注文・同一内容でのご注文</h2>
-                <p>過去注文と同じ内容をベースに、または新規に、届け先・数量・日時を指定して注文する画面です。</p>
-
-                <h3>セクション構成（共通イメージ）</h3>
-                <ol>
-                    <li><strong>お届け先情報</strong>（編集可）：宛名、郵便番号、住所、電話番号</li>
-                    <li><strong>ご注文商品</strong>：商品番号・商品名・数量・小計、行削除、商品番号による追加</li>
-                    <li><strong>お届け希望日時</strong>：日付、時間帯（指定なし／午前中／時間帯別など）</li>
-                    <li><strong>お支払い合計</strong>：商品合計、送料、合計金額（税込）</li>
-                    <li><strong>お支払い方法</strong>：銀行振込・代金引換などから選択</li>
-                    <li><strong>アクション</strong>：確認画面へ進む（カートへの一時保存は任意機能として検討可能）</li>
-                </ol>
-            </section>
-
-            <section class="spec-section" id="s6" aria-labelledby="heading-s6">
-                <h2 id="heading-s6">6. ご注文内容の確認・完了</h2>
-
-                <h3>ご注文内容の確認</h3>
-                <ul>
-                    <li>お届け先、ご注文商品、お届け希望日時、お支払い方法の確認表示。</li>
-                    <li>合計（商品合計・送料・税込合計）。</li>
-                    <li>確定送信で完了画面へ。</li>
-                </ul>
-
-                <h3>ご注文完了</h3>
-                <ul>
-                    <li>送信完了のメッセージ。</li>
-                    <li>登録メールアドレス宛の自動返信メールの案内、届かない場合の注意。</li>
-                    <li>注文一覧へ戻る導線。</li>
-                </ul>
-
-                <h3>完了メール送信（想定）</h3>
-                <p>申し込み完了時に、お客様のメールアドレスへ自動送信することを想定。</p>
-
-                <h4>メール内容（例）</h4>
-                <ul>
-                    <li>申し込み番号</li>
-                    <li>申し込み内容の概要</li>
-                    <li>今後の流れ</li>
-                    <li>お問い合わせ先</li>
-                </ul>
-
-                <h3>申し込み履歴の確認</h3>
-                <ul>
-                    <li>ログイン後の「ご注文一覧」で履歴を表示。</li>
-                    <li><strong>一覧で表示される例</strong>：注文日、宛名、注文内容、詳細内の届け先・商品。</li>
-                </ul>
-            </section>
-
-            <section class="spec-section" id="s7" aria-labelledby="heading-s7">
-                <h2 id="heading-s7">7. マイページ</h2>
-                <ul>
-                    <li>会員情報の確認・変更への導線、ログアウト。</li>
-                </ul>
-            </section>
-
-            <section class="spec-section" id="s8" aria-labelledby="heading-s8">
-                <h2 id="heading-s8">8. 従来仕様メモ（フルステップ型のイメージ）</h2>
-                <p>紙の申込をそのままステップ化する場合の整理例です。上記の「ログイン → 一覧・再注文・マイページ」中心の構成とは、画面の切り方が1対1ではありません。</p>
+                <h2 id="heading-s3">3. 管理画面の構成</h2>
+                <p>運用者向けの管理画面は、次の<strong>3画面（機能ブロック）</strong>に限定して想定しています。それ以外の管理機能（例：商品マスタの編集、発送ステータス管理など）は今回の要件に含めず、必要になったタイミングで追加をご相談いただく形を想定しています。</p>
                 <div class="spec-table-wrap">
                     <table class="spec-table">
                         <thead>
                             <tr>
-                                <th scope="col">ステップ</th>
+                                <th scope="col">機能ブロック</th>
                                 <th scope="col">内容</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1. お客様情報</td>
-                                <td>識別子・連絡先の入力、過去情報の参照</td>
+                                <td><strong>ログイン</strong></td>
+                                <td>運用者認証</td>
                             </tr>
                             <tr>
-                                <td>2. 商品注文</td>
-                                <td>履歴から選択または品番入力</td>
+                                <td><strong>ユーザー管理</strong></td>
+                                <td>会員の一覧・参照、<strong>パスワード変更</strong>、<strong>CSV出力</strong></td>
                             </tr>
                             <tr>
-                                <td>3. お届け先</td>
-                                <td>履歴から選択または新規</td>
-                            </tr>
-                            <tr>
-                                <td>4. 決済方法</td>
-                                <td>クレジット・銀行振込・代金引換など</td>
-                            </tr>
-                            <tr>
-                                <td>5. 利用規約同意</td>
-                                <td>利用規約・個人情報の取り扱い</td>
-                            </tr>
-                            <tr>
-                                <td>6. 注文確認</td>
-                                <td>内容確認のうえ送信</td>
+                                <td><strong>申込管理</strong></td>
+                                <td>申込の一覧・参照、<strong>CSV出力</strong></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+                <p>商品マスタの内容変更は<strong>本管理画面からは行わない</strong>想定とし、データの更新は別途の運用（ファイル連携等）で対応する前提とします。詳細は要件定義時にすり合わせます。</p>
+            </section>
+
+            <section class="spec-section" id="s4" aria-labelledby="heading-s4">
+                <h2 id="heading-s4">4. 前提条件（ミニマムスタート／今後の拡張）</h2>
+                <p>初期リリースでは機能と運用を絞り、まず申込フローを回せる状態を優先します。以下は「今回やらない」のではなく、<strong>今回の要件外とし、必要に応じて今後の対応で検討する</strong>項目です。運用や優先度の変化に合わせて、都度ご相談いただければと考えています。</p>
+                <ul>
+                    <li><strong>予約・在庫</strong>：即時の在庫確定ではなく<strong>リクエスト予約</strong>を想定します。<strong>在庫をシステムで持つ機能は設けません</strong>（実在庫との照合はオフライン運用を想定）。</li>
+                    <li><strong>パスワード変更</strong>：利用者による<strong>自画面からの変更</strong>は想定せず、<strong>管理者画面のユーザー管理</strong>にてパスワード変更に対応する前提とします。運用負担の観点で利用者によるセルフサービス化が必要になった場合は、<strong>別途ご相談</strong>のうえ実装を検討します。</li>
+                    <li><strong>メールアドレス</strong>：<strong>有効性の検証（確認メール等）は行いません</strong>。入力値の形式チェックにとどめる想定です。</li>
+                    <li><strong>商品情報の見せ方</strong>：<strong>商品を探す検索機能や画像表示は想定しません</strong>。カタログ連動の<strong>テキスト情報（品番・説明・金額など）</strong>を画面に載せる前提です。</li>
+                    <li><strong>申込の取り消し</strong>：利用者・管理者向けの<strong>取り消し機能は含めない想定</strong>です。運用上どこまで必要かは温度感をすり合わせたい項目です。</li>
+                    <li><strong>発送</strong>：<strong>発送管理（出荷ステータス・伝票連携など）は行いません</strong>。</li>
+                    <li><strong>スマートフォン</strong>：スマホ専用の別デザインは組まず、<strong>既存画面のレスポンシブ対応で最低限見られる状態</strong>を目指します。手の込んだモバイル最適化は今後の検討とします。</li>
+                    <li><strong>対応ブラウザ・端末</strong>：<strong>Safari および Google Chrome の最新版のみ</strong>を想定します。OS は <strong>Mac・Windows・iOS・Android それぞれの最新版</strong>を前提とし、それ以外は保証対象外とします。</li>
+                    <li><strong>管理画面の管理者アカウント</strong>：初期リリース時は<strong>おおよそ3件分を、SE対応で作成</strong>する想定とします。<strong>管理者アカウントの追加・削除・権限管理などを画面上で行う機能は想定しておらず</strong>、アカウントの増減が必要になった場合は別途ご相談（手作業・DB対応等）とします。</li>
+                </ul>
             </section>
 
             <footer class="spec-doc__closing">
-                <p>以上が、現時点で想定している画面仕様の概要となります。</p>
-                <p>詳細な画面デザインやデータ連携仕様については、今後のお打ち合わせの中で整理させていただければと考えております。</p>
+                <p>以上が、現時点で想定している<strong>利用者向け・管理画面の構成</strong>と前提の整理です。</p>
+                <div class="spec-doc__closing-emphasis" role="note">
+                    <p class="spec-doc__closing-emphasis__text">詳細な画面デザイン・項目定義・データ連携仕様は、要件定義のプロセスで確定させていただきます。<strong class="spec-doc__closing-emphasis__strong">要件定義・デザイン完了後に、開発のお見積もりの再提出（再見積もり）をお願いできれば幸いです。</strong></p>
+                </div>
             </footer>
         </article>
     </main>

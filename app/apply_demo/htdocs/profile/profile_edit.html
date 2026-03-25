@@ -30,80 +30,49 @@
     <main class="container">
         <header class="app-page-header">
             <h1 class="app-page-heading">登録情報の追加</h1>
-            <p class="page-lead">過去のご注文情報に基づき表示しています。<br>不足している情報の入力と、内容のご確認をお願いいたします。</p>
+            <p class="page-lead">表示内容をご確認のうえ、不足分を入力してください。</p>
         </header>
 
         <section class="form-card">
             <div class="card-content">
                 <form action="order_list.html" method="POST">
-                    
-                    <h3 class="form-section-title">貴社情報</h3>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="company_name">会社名 <span class="required-dot"></span></label>
-                            <input type="text" id="company_name" name="company_name" value="株式会社サンプル" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="company_kana">会社名（フリガナ） <span class="required-dot"></span></label>
-                            <input type="text" id="company_kana" name="company_kana" value="カブシキガイシャサンプル" required>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="department">部署・役職</label>
-                        <input type="text" id="department" name="department" value="営業本部 部長">
-                    </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="user_name">ご担当者氏名 <span class="required-dot"></span></label>
-                            <input type="text" id="user_name" name="user_name" value="山田 太郎" required>
+                            <label for="user_name">氏名 <span class="required-dot"></span></label>
+                            <input type="text" id="user_name" name="user_name" value="山田 太郎" required autocomplete="name">
                         </div>
                         <div class="form-group">
-                            <label for="user_kana">ご担当者氏名（フリガナ） <span class="required-dot"></span></label>
+                            <label for="user_kana">氏名（フリガナ） <span class="required-dot"></span></label>
                             <input type="text" id="user_kana" name="user_kana" value="ヤマダ タロウ" required>
                         </div>
                     </div>
 
-                    <h3 class="form-section-title">ご連絡先・お届け先</h3>
-
                     <div class="form-group">
                         <label for="email">メールアドレス <span class="required-dot"></span></label>
-                        <input type="email" id="email" name="email" placeholder="example@sample.co.jp" required>
+                        <input type="email" id="email" name="email" value="yamada@example.com" required autocomplete="email">
                     </div>
 
                     <div class="form-group">
                         <label for="tel">電話番号 <span class="required-dot"></span></label>
-                        <input type="tel" id="tel" name="tel" value="0312345678" required>
+                        <input type="tel" id="tel" name="tel" value="09012345678" required autocomplete="tel">
+                        <p class="form-hint">ログイン時にご利用いただきます。</p>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group" style="flex: 0 0 30%;">
                             <label for="zip">郵便番号 <span class="required-dot"></span></label>
-                            <input type="text" id="zip" name="zip" value="1000001" required>
+                            <input type="text" id="zip" name="zip" value="1000001" required inputmode="numeric" autocomplete="postal-code">
                         </div>
                         <div class="form-group" style="flex: 1;">
                             <label for="address">住所 <span class="required-dot"></span></label>
-                            <input type="text" id="address" name="address" value="東京都千代田区1-1-1 〇〇ビル5F 株式会社サンプル" required>
+                            <input type="text" id="address" name="address" value="東京都千代田区千代田1-1" required autocomplete="street-address">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="industry">業界・業種</label>
-                        <select id="industry" name="industry">
-                            <option value="">選択してください</option>
-                            <option value="it">IT・通信</option>
-                            <option value="manufacturing" selected>製造業</option> <option value="construction">建設・不動産</option>
-                            <option value="service">サービス業</option>
-                            <option value="retail">小売・流通</option>
-                            <option value="other">その他</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password">ログインパスワードの設定 <span class="required-dot"></span></label>
-                        <input type="password" id="password" name="password" placeholder="今後のログイン用パスワード（8文字以上）" required>
+                        <label for="password">ログインパスワード <span class="required-dot"></span></label>
+                        <input type="password" id="password" name="password" placeholder="変更する場合のみ入力（8文字以上）" autocomplete="new-password" minlength="8">
                     </div>
 
                     <div class="agreement-area">
