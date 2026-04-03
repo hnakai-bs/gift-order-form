@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理画面ホーム | ご進物お申込み</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body">
+
+    <header class="admin-header">
+        <div class="admin-header__inner">
+            <a href="index.html" class="admin-header__brand">
+                <img src="../assets/img/logo.png" width="200" height="32" alt="ご進物お申込み">
+                <span class="admin-header__title-block">
+                    <span class="admin-header__product-name">ご進物お申込み</span>
+                    <span class="admin-header__subtitle">管理コンソール</span>
+                </span>
+            </a>
+            <div class="admin-header__tools">
+                <div class="admin-header__user">
+                    <span class="material-icons-outlined admin-header__user-icon" aria-hidden="true">account_circle</span>
+                    <span class="admin-header__user-name">管理1</span>
+                    <a class="admin-header__logout" href="login.html">ログアウト</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar" aria-label="管理メニュー">
+            <p class="admin-sidebar__section">管理</p>
+            <nav class="admin-sidebar__nav" aria-label="管理">
+                <a class="admin-sidebar__link" href="users.html">
+                    <span class="material-icons-outlined" aria-hidden="true">group</span>
+                    ユーザー管理
+                </a>
+                <a class="admin-sidebar__link" href="applications.html">
+                    <span class="material-icons-outlined" aria-hidden="true">description</span>
+                    お申し込み情報
+                </a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <div class="admin-dashboard-head">
+                <h1>ダッシュボード</h1>
+                <p>今週（月曜始まり）の新規ユーザーとお申し込みの概要です。</p>
+            </div>
+
+            <div class="admin-dashboard-grid">
+                <section class="admin-panel" aria-labelledby="dash-users-title">
+                    <div class="admin-panel__head">
+                        <h2 id="dash-users-title" class="admin-panel__title">今週の新規ユーザー</h2>
+                        <span class="admin-panel__sub">登録日</span>
+                    </div>
+                    <div class="admin-panel__body">
+                        <table class="admin-mini-table">
+                            <thead>
+                                <tr>
+                                    <th>お名前</th>
+                                    <th>会社名</th>
+                                    <th>登録日</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-dash-users"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="admin-panel" aria-labelledby="dash-orders-title">
+                    <div class="admin-panel__head">
+                        <h2 id="dash-orders-title" class="admin-panel__title">今週のお申し込み</h2>
+                        <span class="admin-panel__sub">申込日</span>
+                    </div>
+                    <div class="admin-panel__body">
+                        <table class="admin-mini-table">
+                            <thead>
+                                <tr>
+                                    <th>申込日</th>
+                                    <th>ご注文者</th>
+                                    <th>注文内容</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-dash-orders"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <p class="copyright">©MARUYAMA NORI.Co.,Ltd. All rights reserved.</p>
+    </footer>
+
+    <script src="../assets/js/admin-mock-data.js"></script>
+    <script src="../assets/js/admin-utils.js"></script>
+    <script src="../assets/js/admin-dashboard.js"></script>
+</body>
+</html>

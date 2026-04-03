@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理画面ログイン | ご進物お申込み</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-login-body has-fixed-app-header">
+
+    <header class="app-fixed-header">
+        <div class="app-fixed-header__inner">
+            <a href="../order/index.html" class="app-fixed-header__logo">
+                <img src="../assets/img/logo.png" width="200" height="40" alt="ご進物お申込み">
+            </a>
+        </div>
+    </header>
+
+    <main class="admin-login-wrap">
+        <header class="app-page-header">
+            <p class="admin-login-badge" aria-hidden="true">ADMIN</p>
+            <h1 class="app-page-heading">管理画面ログイン</h1>
+        </header>
+
+        <section class="admin-login-card" aria-labelledby="admin-login-title">
+            <div class="card-content">
+                <h2 id="admin-login-title" class="card-title">管理者ログイン</h2>
+                <p class="admin-login-lead">
+                    管理者IDとパスワードを入力してください。デモでは任意の値でログインできます。
+                </p>
+                <form class="login-form" action="index.html" method="get" id="admin-login-form">
+                    <div class="form-group">
+                        <label for="admin-id">管理者ID</label>
+                        <input type="text" id="admin-id" name="admin_id" autocomplete="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admin-password">パスワード</label>
+                        <input type="password" id="admin-password" name="admin_password" autocomplete="current-password" required>
+                    </div>
+                    <div class="action-area">
+                        <button type="submit" class="btn btn-primary">ログイン</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p class="copyright">©MARUYAMA NORI.Co.,Ltd. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("admin-login-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>

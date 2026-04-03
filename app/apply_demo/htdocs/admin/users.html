@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ユーザー管理 | 管理画面</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body" data-admin-page="users">
+
+    <header class="admin-header">
+        <div class="admin-header__inner">
+            <a href="index.html" class="admin-header__brand">
+                <img src="../assets/img/logo.png" width="200" height="32" alt="ご進物お申込み">
+                <span class="admin-header__title-block">
+                    <span class="admin-header__product-name">ご進物お申込み</span>
+                    <span class="admin-header__subtitle">管理コンソール</span>
+                </span>
+            </a>
+            <div class="admin-header__tools">
+                <div class="admin-header__user">
+                    <span class="material-icons-outlined admin-header__user-icon" aria-hidden="true">account_circle</span>
+                    <span class="admin-header__user-name">管理1</span>
+                    <a class="admin-header__logout" href="login.html">ログアウト</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar" aria-label="管理メニュー">
+            <p class="admin-sidebar__section">管理</p>
+            <nav class="admin-sidebar__nav" aria-label="管理">
+                <a class="admin-sidebar__link is-active" href="users.html" aria-current="page">
+                    <span class="material-icons-outlined" aria-hidden="true">group</span>
+                    ユーザー管理
+                </a>
+                <a class="admin-sidebar__link" href="applications.html">
+                    <span class="material-icons-outlined" aria-hidden="true">description</span>
+                    お申し込み情報
+                </a>
+            </nav>
+        </aside>
+
+        <main class="admin-main admin-main--stack">
+            <header class="admin-list-page-intro">
+                <div class="admin-list-page-intro__top">
+                    <h1 class="admin-list-page-intro__title">ユーザー管理</h1>
+                    <button type="button" class="admin-btn admin-btn--primary" id="admin-users-csv">CSV出力</button>
+                </div>
+                
+            </header>
+
+            <article class="admin-page-card admin-users-filter-card" aria-labelledby="users-filter-heading">
+                <header class="admin-page-card__head admin-page-card__head--sub">
+                    <div class="admin-page-card__head-main">
+                        <span class="material-icons-outlined admin-page-card__icon" aria-hidden="true">filter_list</span>
+                        <div>
+                            <h2 id="users-filter-heading" class="admin-page-card__title admin-page-card__title--sub">検索・期間指定</h2>
+                            <p class="admin-page-card__lead">キーワードや注文日の期間で絞り込みできます。</p>
+                        </div>
+                    </div>
+                </header>
+                <div class="admin-page-card__body">
+                    <div class="admin-toolbar admin-toolbar--filter-only" role="region" aria-label="一覧の絞り込み">
+                        <div class="admin-field">
+                            <label for="admin-users-search">キーワード検索</label>
+                            <input type="search" id="admin-users-search" placeholder="氏名・会社">
+                        </div>
+                        <div class="admin-field">
+                            <label for="admin-users-from">期間（開始）</label>
+                            <input type="date" id="admin-users-from">
+                        </div>
+                        <div class="admin-field">
+                            <label for="admin-users-to">期間（終了）</label>
+                            <input type="date" id="admin-users-to">
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="admin-page-card admin-users-list-card" aria-labelledby="users-list-heading">
+                <header class="admin-page-card__head admin-page-card__head--sub">
+                    <div class="admin-page-card__head-main">
+                        <span class="material-icons-outlined admin-page-card__icon" aria-hidden="true">table_rows</span>
+                        <div>
+                            <h2 id="users-list-heading" class="admin-page-card__title admin-page-card__title--sub">会員一覧</h2>
+                            
+                        </div>
+                    </div>
+                </header>
+                <div class="admin-page-card__body">
+                    <div class="admin-table-wrap admin-table-wrap--in-card">
+                        <table class="admin-data-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="admin-th--sortable">
+                                        <div class="admin-th-with-menu">
+                                            <span class="admin-th-with-menu__label">お名前</span>
+                                            <details class="admin-col-sort" data-sort-col="name">
+                                                <summary class="admin-col-sort__summary" aria-label="お名前の並び替え">
+                                                    <span class="material-icons-outlined" aria-hidden="true">import_export</span>
+                                                </summary>
+                                                <div class="admin-col-sort__panel">
+                                                    <button type="button" class="admin-col-sort__option" data-sort-choice="gojuon">五十音順で表示</button>
+                                                    <button type="button" class="admin-col-sort__option" data-sort-choice="date">日付順で表示</button>
+                                                </div>
+                                            </details>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="admin-th--sortable">
+                                        <div class="admin-th-with-menu">
+                                            <span class="admin-th-with-menu__label">会社名</span>
+                                            <details class="admin-col-sort" data-sort-col="company">
+                                                <summary class="admin-col-sort__summary" aria-label="会社名の並び替え">
+                                                    <span class="material-icons-outlined" aria-hidden="true">import_export</span>
+                                                </summary>
+                                                <div class="admin-col-sort__panel">
+                                                    <button type="button" class="admin-col-sort__option" data-sort-choice="gojuon">五十音順で表示</button>
+                                                    <button type="button" class="admin-col-sort__option" data-sort-choice="date">日付順で表示</button>
+                                                </div>
+                                            </details>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="admin-th--sortable">
+                                        <div class="admin-th-with-menu">
+                                            <span class="admin-th-with-menu__label">直近注文日</span>
+                                            <details class="admin-col-sort" data-sort-col="date">
+                                                <summary class="admin-col-sort__summary" aria-label="注文日の並び替え">
+                                                    <span class="material-icons-outlined" aria-hidden="true">import_export</span>
+                                                </summary>
+                                                <div class="admin-col-sort__panel">
+                                                    <button type="button" class="admin-col-sort__option" data-sort-choice="date_desc">降順で表示</button>
+                                                    <button type="button" class="admin-col-sort__option" data-sort-choice="date_asc">昇順で表示</button>
+                                                </div>
+                                            </details>
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="admin-th--static">操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="admin-users-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <p class="copyright">©MARUYAMA NORI.Co.,Ltd. All rights reserved.</p>
+    </footer>
+
+    <script src="../assets/js/admin-mock-data.js"></script>
+    <script src="../assets/js/admin-utils.js"></script>
+    <script src="../assets/js/admin-lists.js"></script>
+</body>
+</html>

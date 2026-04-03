@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お申し込み詳細 | 管理画面</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/order.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body">
+
+    <header class="admin-header">
+        <div class="admin-header__inner">
+            <a href="index.html" class="admin-header__brand">
+                <img src="../assets/img/logo.png" width="200" height="32" alt="ご進物お申込み">
+                <span class="admin-header__title-block">
+                    <span class="admin-header__product-name">ご進物お申込み</span>
+                    <span class="admin-header__subtitle">管理コンソール</span>
+                </span>
+            </a>
+            <div class="admin-header__tools">
+                <div class="admin-header__user">
+                    <span class="material-icons-outlined admin-header__user-icon" aria-hidden="true">account_circle</span>
+                    <span class="admin-header__user-name">管理1</span>
+                    <a class="admin-header__logout" href="login.html">ログアウト</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar" aria-label="管理メニュー">
+            <p class="admin-sidebar__section">管理</p>
+            <nav class="admin-sidebar__nav" aria-label="管理">
+                <a class="admin-sidebar__link" href="users.html">
+                    <span class="material-icons-outlined" aria-hidden="true">group</span>
+                    ユーザー管理
+                </a>
+                <a class="admin-sidebar__link is-active" href="applications.html" aria-current="page">
+                    <span class="material-icons-outlined" aria-hidden="true">description</span>
+                    お申し込み情報
+                </a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <article class="admin-page-card admin-page-card--readable">
+                <header class="admin-page-card__head">
+                    <div class="admin-page-card__head-main">
+                        <span class="material-icons-outlined admin-page-card__icon" aria-hidden="true">fact_check</span>
+                        <div>
+                            <h1 class="admin-page-card__title">お申し込み内容の確認</h1>
+                           
+                        </div>
+                    </div>
+                </header>
+                <div class="admin-page-card__body admin-page-card__body--padded admin-confirm">
+                    <div class="admin-back-row">
+                        <a href="applications.html">← お申し込み一覧に戻る</a>
+                    </div>
+
+                    <div class="confirm-content-wrapper">
+                        <section class="confirm-section">
+                            <div class="confirm-section-header">
+                                <h2 class="confirm-section-title">お届け先情報</h2>
+                            </div>
+                            <div class="confirm-data-card">
+                                <dl class="confirm-data-list">
+                                    <div>
+                                        <dt>宛名</dt>
+                                        <dd id="od-dest-line"></dd>
+                                    </div>
+                                    <div>
+                                        <dt>お届け先</dt>
+                                        <dd id="od-dest-address"></dd>
+                                    </div>
+                                    <div>
+                                        <dt>電話番号</dt>
+                                        <dd id="od-dest-tel"></dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </section>
+
+                        <section class="confirm-section">
+                            <div class="confirm-section-header">
+                                <h2 class="confirm-section-title">ご注文商品</h2>
+                            </div>
+                            <div class="confirm-data-card">
+                                <table class="confirm-product-table">
+                                    <thead>
+                                        <tr>
+                                            <th>商品番号</th>
+                                            <th>商品名</th>
+                                            <th>数量</th>
+                                            <th class="text-right">小計</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="od-product-tbody"></tbody>
+                                </table>
+                            </div>
+                        </section>
+
+                        <section class="confirm-section">
+                            <div class="confirm-section-header">
+                                <h2 class="confirm-section-title">ご用途・のし</h2>
+                            </div>
+                            <div class="confirm-data-card">
+                                <dl class="confirm-data-list">
+                                    <div>
+                                        <dt>ご用途・のしの種類</dt>
+                                        <dd id="od-use-noshi"></dd>
+                                    </div>
+                                    <div>
+                                        <dt>名入れ</dt>
+                                        <dd id="od-name-type"></dd>
+                                    </div>
+                                    <div>
+                                        <dt>名入れ内容</dt>
+                                        <dd id="od-name-text"></dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </section>
+
+                        <section class="confirm-section">
+                            <div class="confirm-section-header">
+                                <h2 class="confirm-section-title">お届け希望日時</h2>
+                            </div>
+                            <div class="confirm-data-card">
+                                <dl class="confirm-data-list">
+                                    <div>
+                                        <dt>お届け希望日</dt>
+                                        <dd id="od-delivery-date"></dd>
+                                    </div>
+                                    <div>
+                                        <dt>お届け時間帯</dt>
+                                        <dd id="od-delivery-time"></dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </section>
+
+                        <section class="confirm-section">
+                            <div class="confirm-section-header">
+                                <h2 class="confirm-section-title">お支払い方法・メールアドレス</h2>
+                            </div>
+                            <div class="confirm-data-card">
+                                <dl class="confirm-data-list">
+                                    <div>
+                                        <dt>お支払い方法</dt>
+                                        <dd id="od-payment"></dd>
+                                    </div>
+                                    <div>
+                                        <dt>メールアドレス</dt>
+                                        <dd id="od-email"></dd>
+                                    </div>
+                                </dl>
+                            </div>
+                        </section>
+
+                        <section class="final-action-section">
+                            <div class="summary-total-box">
+                                <div class="summary-total-rows">
+                                    <div class="summary-total-row">
+                                        <span>商品合計</span>
+                                        <span id="od-product-total"></span>
+                                    </div>
+                                    <div class="summary-total-row">
+                                        <span>送料</span>
+                                        <span id="od-shipping"></span>
+                                    </div>
+                                    <div class="summary-total-row total">
+                                        <span>お支払い合計（税込）</span>
+                                        <span class="total-amount" id="od-grand-total"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <p class="copyright">©MARUYAMA NORI.Co.,Ltd. All rights reserved.</p>
+    </footer>
+
+    <script src="../assets/js/admin-mock-data.js"></script>
+    <script src="../assets/js/admin-order-detail.js"></script>
+</body>
+</html>

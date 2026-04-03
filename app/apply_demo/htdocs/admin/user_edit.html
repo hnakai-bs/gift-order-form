@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>会員情報の編集 | 管理画面</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body class="admin-body">
+
+    <header class="admin-header">
+        <div class="admin-header__inner">
+            <a href="index.html" class="admin-header__brand">
+                <img src="../assets/img/logo.png" width="200" height="32" alt="ご進物お申込み">
+                <span class="admin-header__title-block">
+                    <span class="admin-header__product-name">ご進物お申込み</span>
+                    <span class="admin-header__subtitle">管理コンソール</span>
+                </span>
+            </a>
+            <div class="admin-header__tools">
+                <div class="admin-header__user">
+                    <span class="material-icons-outlined admin-header__user-icon" aria-hidden="true">account_circle</span>
+                    <span class="admin-header__user-name">管理1</span>
+                    <a class="admin-header__logout" href="login.html">ログアウト</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-layout">
+        <aside class="admin-sidebar" aria-label="管理メニュー">
+            <p class="admin-sidebar__section">管理</p>
+            <nav class="admin-sidebar__nav" aria-label="管理">
+                <a class="admin-sidebar__link is-active" href="users.html" aria-current="page">
+                    <span class="material-icons-outlined" aria-hidden="true">group</span>
+                    ユーザー管理
+                </a>
+                <a class="admin-sidebar__link" href="applications.html">
+                    <span class="material-icons-outlined" aria-hidden="true">description</span>
+                    お申し込み情報
+                </a>
+            </nav>
+        </aside>
+
+        <main class="admin-main">
+            <article class="admin-page-card admin-form-shell">
+                <header class="admin-page-card__head">
+                    <div class="admin-page-card__head-main">
+                        <span class="material-icons-outlined admin-page-card__icon" aria-hidden="true">person</span>
+                        <div>
+                            <h1 class="admin-page-card__title">会員情報の編集</h1>
+                            <p class="admin-page-card__lead">会員の登録内容を確認・変更します。</p>
+                        </div>
+                    </div>
+                </header>
+                <div class="admin-page-card__body admin-page-card__body--padded">
+                    <div class="admin-back-row">
+                        <a href="users.html">← ユーザー管理に戻る</a>
+                    </div>
+                    <section class="form-card">
+                        <div class="card-content">
+                            <form action="users.html" method="get" id="admin-user-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="user_name">氏名 <span class="required-dot"></span></label>
+                                        <input type="text" id="user_name" name="user_name" required autocomplete="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="user_kana">氏名（フリガナ） <span class="required-dot"></span></label>
+                                        <input type="text" id="user_kana" name="user_kana" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="company">会社名</label>
+                                    <input type="text" id="company" name="company" autocomplete="organization">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">メールアドレス <span class="required-dot"></span></label>
+                                    <input type="email" id="email" name="email" required autocomplete="email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tel">電話番号 <span class="required-dot"></span></label>
+                                    <input type="tel" id="tel" name="tel" required autocomplete="tel">
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group" style="flex: 0 0 30%;">
+                                        <label for="zip">郵便番号 <span class="required-dot"></span></label>
+                                        <input type="text" id="zip" name="zip" required inputmode="numeric" autocomplete="postal-code">
+                                    </div>
+                                    <div class="form-group" style="flex: 1;">
+                                        <label for="address">住所 <span class="required-dot"></span></label>
+                                        <input type="text" id="address" name="address" required autocomplete="street-address">
+                                    </div>
+                                </div>
+
+                                <h2 class="form-section-title">パスワードを変更</h2>
+                                <p class="form-hint">変更しない場合は空欄のままにしてください。</p>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="new_password">新しいパスワード</label>
+                                        <input type="password" id="new_password" name="new_password" autocomplete="new-password" minlength="8">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="new_password_confirm">新しいパスワード（確認）</label>
+                                        <input type="password" id="new_password_confirm" name="new_password_confirm" autocomplete="new-password" minlength="8">
+                                    </div>
+                                </div>
+
+                                <div class="action-area center">
+                                    <button type="submit" class="btn btn-primary btn-wide">変更を登録する</button>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <footer class="site-footer">
+        <p class="copyright">©MARUYAMA NORI.Co.,Ltd. All rights reserved.</p>
+    </footer>
+
+    <script src="../assets/js/admin-mock-data.js"></script>
+    <script src="../assets/js/admin-user-edit.js"></script>
+    <script>
+        document.getElementById("admin-user-form").addEventListener("submit", function (e) {
+            e.preventDefault();
+            var form = document.getElementById("admin-user-form");
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+            var p = document.getElementById("new_password").value;
+            var c = document.getElementById("new_password_confirm").value;
+            if (p || c) {
+                if (p !== c) {
+                    alert("新しいパスワードと確認用の入力が一致しません。");
+                    return;
+                }
+                if (p.length < 8) {
+                    alert("パスワードは8文字以上で入力してください。");
+                    return;
+                }
+            }
+            window.location.href = "users.html";
+        });
+    </script>
+</body>
+</html>
