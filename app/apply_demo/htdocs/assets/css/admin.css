@@ -312,10 +312,6 @@
     line-height: 1.65;
 }
 
-.admin-page-card__head--sub {
-    padding: 18px 22px 14px;
-}
-
 .admin-page-card__title--sub {
     font-size: 1.05rem;
     margin-bottom: 4px;
@@ -324,6 +320,57 @@
 .admin-toolbar--filter-only {
     border-bottom: none;
     background: #fff;
+}
+
+.admin-toolbar--apps-filter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+}
+
+.admin-apps-filter-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px 16px;
+    width: 100%;
+}
+
+.admin-apps-filter-row--keyword {
+    gap: 12px 14px;
+}
+
+.admin-field-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px 12px;
+    flex: 1 1 240px;
+    min-width: 0;
+    max-width: 720px;
+}
+
+.admin-field-inline .admin-field {
+    flex: 1 1 200px;
+    min-width: 0;
+}
+
+.admin-field-inline .admin-btn {
+    flex-shrink: 0;
+}
+
+.admin-apps-filter-row--period .admin-btn {
+    flex-shrink: 0;
+}
+
+.admin-apps-filter-row--reset {
+    justify-content: flex-end;
+}
+
+@media (max-width: 520px) {
+    .admin-apps-filter-row--reset .admin-btn {
+        width: 100%;
+    }
 }
 
 /* ----- ページカード（一覧・フォーム） ----- */
@@ -341,7 +388,7 @@
 }
 
 /* overflow: visible でもカードの角丸は元と同じ --admin-radius（12px）で揃える */
-.admin-page-card:has(.admin-col-sort) .admin-page-card__head {
+.admin-page-card:has(.admin-col-sort) .admin-page-card__body {
     border-top-left-radius: var(--admin-radius);
     border-top-right-radius: var(--admin-radius);
 }
@@ -352,13 +399,7 @@
 }
 
 .admin-page-card__head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 22px 24px 18px;
-    border-bottom: 1px solid var(--admin-border);
-    background: linear-gradient(180deg, #fff 0%, #fafbfc 100%);
+    display: none;
 }
 
 .admin-page-card__head-main {
@@ -761,6 +802,16 @@
     white-space: nowrap;
 }
 
+.admin-data-table thead th:has(.admin-col-sort[data-sort-col="email"]) {
+    min-width: 14rem;
+}
+
+.admin-data-table td.cell-email {
+    max-width: min(22rem, 40vw);
+    word-break: break-all;
+    font-size: 0.8125rem;
+}
+
 .admin-data-table .cell-name {
     font-weight: 600;
     font-family: var(--sans);
@@ -1090,24 +1141,41 @@
 }
 
 .admin-back-row {
-    margin-bottom: 16px;
+    margin-bottom: 50px;
 }
 
-.admin-back-row a {
+.admin-back-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    color: var(--admin-text-muted);
+    gap: 8px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--admin-primary);
     text-decoration: none;
-    border-radius: 6px;
-    padding: 4px 0;
-    transition: color 0.2s ease;
+    border-radius: var(--admin-radius-sm);
+    padding: 10px 18px 10px 14px;
+    border: 1px solid rgba(37, 99, 235, 0.35);
+    background: var(--admin-primary-soft);
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
+    transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.admin-back-row a:hover {
-    color: var(--admin-primary);
+.admin-back-link__icon {
+    font-size: 22px !important;
+    opacity: 0.92;
+}
+
+.admin-back-link:hover {
+    color: var(--admin-primary-hover);
+    border-color: var(--admin-primary);
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.12);
+}
+
+.admin-back-link:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--admin-primary-soft), 0 2px 8px rgba(37, 99, 235, 0.12);
 }
 
 .admin-body .app-page-header {
@@ -1128,15 +1196,32 @@
 }
 
 /* ----- 注文確認風 ----- */
-.admin-confirm {
+/* .admin-confirm {
     max-width: 720px;
+} */
+
+.admin-confirm .confirm-content-wrapper {
+    margin-inline: 60px;
 }
 
-.admin-confirm .confirm-section-title {
+.admin-confirm .confirm-section-title,
+.admin-form-shell .confirm-section-title {
     font-family: var(--sans);
+    font-size: 1.1rem;
+    font-weight: 600;
     color: var(--admin-primary);
     border-left: none;
     padding-left: 0;
+    margin: 0;
+    letter-spacing: 0.02em;
+}
+
+.admin-form-block-heading {
+    margin-bottom: 20px;
+}
+
+.admin-form-shell #admin-user-form > .admin-form-block-heading {
+    margin-top: 48px;
 }
 
 .admin-confirm .confirm-data-card,
@@ -1182,6 +1267,8 @@
     padding-left: 0;
     padding-right: 0;
     padding-bottom: 0;
+    padding-inline: 50px;
+    padding-top: 0px;
 }
 
 .admin-body .admin-form-shell .btn.btn-primary {
@@ -1202,4 +1289,8 @@
     color: var(--admin-primary);
     border-left: none;
     padding-left: 0;
+}
+
+.final-action-section .summary-total-box{
+    justify-content: center;
 }

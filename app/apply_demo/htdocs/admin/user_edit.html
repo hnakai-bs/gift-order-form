@@ -61,10 +61,16 @@
                 </header>
                 <div class="admin-page-card__body admin-page-card__body--padded">
                     <div class="admin-back-row">
-                        <a href="users.html">← ユーザー管理に戻る</a>
+                        <a href="users.html" class="admin-back-link">
+                            <span class="material-icons-outlined admin-back-link__icon" aria-hidden="true">arrow_back</span>
+                            ユーザー管理に戻る
+                        </a>
                     </div>
                     <section class="form-card">
                         <div class="card-content">
+                            <div class="admin-form-block-heading">
+                                <h2 class="confirm-section-title">ユーザー情報</h2>
+                            </div>
                             <form action="users.html" method="get" id="admin-user-form">
                                 <div class="form-row">
                                     <div class="form-group">
@@ -103,7 +109,9 @@
                                     </div>
                                 </div>
 
-                                <h2 class="form-section-title">パスワードを変更</h2>
+                                <div class="admin-form-block-heading">
+                                    <h2 class="confirm-section-title">パスワードを変更</h2>
+                                </div>
                                 <p class="form-hint">変更しない場合は空欄のままにしてください。</p>
                                 <div class="form-row">
                                     <div class="form-group">

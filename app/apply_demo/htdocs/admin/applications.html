@@ -56,35 +56,46 @@
             </header>
 
             <article class="admin-page-card admin-apps-filter-card" aria-labelledby="apps-filter-heading">
-                <header class="admin-page-card__head admin-page-card__head--sub">
+                <header class="admin-page-card__head">
                     <div class="admin-page-card__head-main">
                         <span class="material-icons-outlined admin-page-card__icon" aria-hidden="true">filter_list</span>
                         <div>
-                            <h2 id="apps-filter-heading" class="admin-page-card__title admin-page-card__title--sub">検索・期間指定</h2>
-                            <p class="admin-page-card__lead">キーワードや申込日の期間で絞り込みできます。</p>
+                            <h2 id="apps-filter-heading" class="admin-page-card__title admin-page-card__title--sub">キーワード検索・期間指定</h2>
+                            <p class="admin-page-card__lead">キーワードだけ、期間だけ、または両方を組み合わせて絞り込めます。それぞれの「検索」を押すと一覧が更新されます。</p>
                         </div>
                     </div>
                 </header>
                 <div class="admin-page-card__body">
-                    <div class="admin-toolbar admin-toolbar--filter-only" role="region" aria-label="一覧の絞り込み">
-                        <div class="admin-field">
-                            <label for="admin-apps-search">キーワード検索</label>
-                            <input type="search" id="admin-apps-search" placeholder="ご注文者・宛名・注文内容">
+                    <div class="admin-toolbar admin-toolbar--filter-only admin-toolbar--apps-filter" role="region" aria-label="一覧の絞り込み">
+                        <div class="admin-apps-filter-row admin-apps-filter-row--keyword">
+                            <div class="admin-field-inline">
+                                <div class="admin-field">
+                                    <label for="admin-apps-search">キーワード検索</label>
+                                    <input type="search" id="admin-apps-search" placeholder="ご注文者・宛名・注文内容" autocomplete="off">
+                                </div>
+                                <button type="button" class="admin-btn admin-btn--primary" id="admin-apps-search-btn" aria-label="キーワードで一覧を検索">検索</button>
+                            </div>
                         </div>
-                        <div class="admin-field">
-                            <label for="admin-apps-from">期間（開始）</label>
-                            <input type="date" id="admin-apps-from">
+                        <div class="admin-apps-filter-row admin-apps-filter-row--period">
+                            <div class="admin-field">
+                                <label for="admin-apps-from">期間（開始）</label>
+                                <input type="date" id="admin-apps-from">
+                            </div>
+                            <div class="admin-field">
+                                <label for="admin-apps-to">期間（終了）</label>
+                                <input type="date" id="admin-apps-to">
+                            </div>
+                            <button type="button" class="admin-btn admin-btn--primary" id="admin-apps-period-search-btn" aria-label="指定した期間で一覧を検索">検索</button>
                         </div>
-                        <div class="admin-field">
-                            <label for="admin-apps-to">期間（終了）</label>
-                            <input type="date" id="admin-apps-to">
+                        <div class="admin-apps-filter-row admin-apps-filter-row--reset">
+                            <button type="button" class="admin-btn admin-btn--ghost" id="admin-apps-filter-reset">条件をリセット</button>
                         </div>
                     </div>
                 </div>
             </article>
 
             <article class="admin-page-card admin-apps-list-card" aria-labelledby="apps-list-heading">
-                <header class="admin-page-card__head admin-page-card__head--sub">
+                <header class="admin-page-card__head">
                     <div class="admin-page-card__head-main">
                         <span class="material-icons-outlined admin-page-card__icon" aria-hidden="true">table_rows</span>
                         <div>

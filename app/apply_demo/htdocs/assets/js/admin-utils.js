@@ -118,7 +118,7 @@
     }
 
     /**
-     * ユーザー管理一覧用: column は name | company | date（latestOrderDate）
+     * ユーザー管理一覧用: column は name | company | email | date（latestOrderDate）
      * direction: asc | desc — 日付は desc が新しい順
      * 五十音は kana / companyKana を用いる（漢字のコードポイント順ではない）
      */
@@ -132,6 +132,13 @@
         } else if (column === "company") {
             copy.sort(function (a, b) {
                 var c = compareJapaneseSort(userCompanySortKey(a), userCompanySortKey(b));
+                return direction === "asc" ? c : -c;
+            });
+        } else if (column === "email") {
+            copy.sort(function (a, b) {
+                var ea = String(a.email || "").toLowerCase();
+                var eb = String(b.email || "").toLowerCase();
+                var c = ea.localeCompare(eb, "en");
                 return direction === "asc" ? c : -c;
             });
         } else {

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ご進物申込・申し込みシステム ご提案 | スライド</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&family=Noto+Serif+JP:wght@500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #64517f;
+      --text: #333333;
+      --text-muted: #666666;
+      --border: #e0e0e0;
+      --slide-bg: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans JP", sans-serif;
+      color: var(--text);
+      background: #e8e6ec;
+      line-height: 1.75;
+    }
+
+    .slides-root {
+      padding: 24px 16px 48px;
+    }
+
+    .slide {
+      --slide-pad-y: clamp(28px, 3.2vw, 48px);
+      --slide-pad-x: clamp(36px, 4vw, 64px);
+      --slide-header-gap: clamp(20px, 2.5vw, 36px);
+      --slide-section-gap: clamp(20px, 2.2vw, 32px);
+      --slide-row-gap: clamp(16px, 2vw, 32px);
+
+      width: min(100%, 1280px);
+      aspect-ratio: 16 / 9;
+      margin: 0 auto 24px;
+      background: var(--slide-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      padding: var(--slide-pad-y) var(--slide-pad-x);
+      overflow: hidden;
+    }
+
+    .slide:last-child {
+      margin-bottom: 0;
+    }
+
+    .slide--title-only {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .slide-title-only-inner {
+      max-width: 90%;
+    }
+
+    .slide-title-only-inner h1 {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 600;
+      font-size: clamp(1.75rem, 4.2vw, 2.75rem);
+      margin: 0 0 0.5em;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .slide-title-only-inner .slide-lead {
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: var(--text-muted);
+      margin: 0 0 1.5em;
+    }
+
+    .slide-title-only-inner .slide-meta {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      color: var(--primary);
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .slide-header {
+      flex-shrink: 0;
+      padding-bottom: var(--slide-header-gap);
+      border-bottom: 3px solid var(--primary);
+    }
+
+    .slide-header h2 {
+      font-family: "Noto Serif JP", serif;
+      font-weight: 600;
+      font-size: clamp(1.35rem, 2.8vw, 2rem);
+      margin: 0;
+      line-height: 1.3;
+    }
+
+    .slide-header .slide-kicker {
+      display: block;
+      font-size: clamp(0.75rem, 1.2vw, 0.875rem);
+      font-weight: 500;
+      color: var(--primary);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.35em;
+    }
+
+    .slide-body {
+      flex: 1;
+      padding-top: var(--slide-section-gap);
+      font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+      line-height: 1.75;
+    }
+
+    .slide-body > p:first-child {
+      margin-top: 0;
+    }
+
+    .slide-body > p:last-child {
+      margin-bottom: 0;
+    }
+
+    .slide-body p {
+      margin: 0 0 0.85em;
+    }
+
+    .slide-body ul {
+      margin: 0;
+      padding-left: 1.25em;
+    }
+
+    .slide-body li {
+      margin-bottom: 0.4em;
+    }
+
+    .slide-body li:last-child {
+      margin-bottom: 0;
+    }
+
+    .slide-body strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .slide-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 2.35fr;
+      gap: var(--slide-row-gap) clamp(20px, 3vw, 40px);
+      align-items: start;
+      height: 100%;
+    }
+
+    .slide-col h3 {
+      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+      font-weight: 600;
+      margin: 0 0 0.6em;
+      color: var(--primary);
+    }
+
+    .slide-col p {
+      margin: 0 0 0.75em;
+    }
+
+    .slide-table-wrap {
+      overflow: auto;
+      max-height: 100%;
+    }
+
+    .slide-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: clamp(0.8rem, 1.25vw, 0.95rem);
+      line-height: 1.5;
+    }
+
+    .slide-table th,
+    .slide-table td {
+      border: 1px solid var(--border);
+      padding: 0.45em 0.6em;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .slide-table th {
+      background: rgba(100, 81, 127, 0.08);
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .slide-table td:first-child {
+      font-weight: 500;
+      width: 28%;
+    }
+
+    .slide-note {
+      margin-top: var(--slide-section-gap);
+      padding: 0.75em 1em;
+      background: rgba(100, 81, 127, 0.06);
+      border-left: 4px solid var(--primary);
+      font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+      line-height: 1.65;
+    }
+
+    .slide-note p {
+      margin: 0;
+    }
+
+    @page {
+      size: 297mm 167.0625mm;
+      margin: 0;
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .slides-root {
+        padding: 0;
+      }
+
+      .slide {
+        --slide-pad-y: 9mm;
+        --slide-pad-x: 12mm;
+        --slide-header-gap: 6mm;
+        --slide-section-gap: 5mm;
+        --slide-row-gap: 4mm;
+
+        width: 841.89pt !important;
+        height: calc(841.89pt * 9 / 16) !important;
+        max-width: none !important;
+        aspect-ratio: unset !important;
+        margin: 0 !important;
+        border: none !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
+        page-break-after: always;
+        page-break-inside: avoid;
+      }
+
+      .slide:last-child {
+        page-break-after: auto;
+      }
+
+      .slide-body {
+        flex-grow: 1;
+      }
+
+      .slide-title-only-inner h1 {
+        font-size: 28pt;
+      }
+
+      .slide-title-only-inner .slide-lead {
+        font-size: 14pt;
+      }
+
+      .slide-title-only-inner .slide-meta {
+        font-size: 11pt;
+      }
+
+      .slide-header h2 {
+        font-size: 20pt;
+      }
+
+      .slide-header .slide-kicker {
+        font-size: 9pt;
+      }
+
+      .slide-body {
+        font-size: 11pt;
+      }
+
+      .slide-table {
+        font-size: 9.5pt;
+      }
+
+      .slide-note {
+        font-size: 9pt;
+      }
+
+      .slide-col h3 {
+        font-size: 11pt;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="slides-root">
+
+    <section class="slide slide--title-only" aria-label="表紙">
+      <div class="slide-title-only-inner">
+        <h1>ご進物申込・申し込みシステム</h1>
+        <p class="slide-lead">お中元・お歳暮などの申込をオンライン化するご提案<br>（画面デモ・見積もり前提条件に基づく整理）</p>
+        <p class="slide-meta">gift-order-form / apply_demo</p>
+      </div>
+    </section>
+
+    <section class="slide" aria-label="背景と目的">
+      <header class="slide-header">
+        <span class="slide-kicker">01</span>
+        <h2>背景と目的</h2>
+      </header>
+      <div class="slide-body">
+        <p>現在<strong>紙の申込用紙</strong>で受け付けているご進物のお申し込みを、<strong>Web 上で入力・確認・送信</strong>できる仕組みへ移行することを目的としています。</p>
+        <ul>
+          <li>お客様負担の軽減（再入力の削減、履歴の活用）</li>
+          <li>受付オペレーションの整理（データの一元化、CSV 等での活用）</li>
+          <li>まずは<strong>ミニマムな機能でオンライン申込をスタート</strong>し、運用しながら段階的に拡張する方針です。</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="slide" aria-label="実現したいこと">
+      <header class="slide-header">
+        <span class="slide-kicker">02</span>
+        <h2>システムで実現すること</h2>
+      </header>
+      <div class="slide-body">
+        <ul>
+          <li>お客様がオンライン画面から<strong>申し込み内容を入力</strong>できる</li>
+          <li>入力内容を<strong>確認して送信</strong>できる</li>
+          <li><strong>過去の申し込み履歴を参照</strong>し、同様の内容で再注文したり、送り主情報を整えたうえで注文できる</li>
+        </ul>
+        <p>初期対応では、過去データを<strong>指定フォーマット（Excel / CSV）</strong>でご提供いただき、取り込み・照会の土台とする想定です。</p>
+      </div>
+    </section>
+
+    <section class="slide" aria-label="利用者向け画面">
+      <header class="slide-header">
+        <span class="slide-kicker">03</span>
+        <h2>利用者向けの画面構成</h2>
+      </header>
+      <div class="slide-body">
+        <div class="slide-table-wrap">
+          <table class="slide-table">
+            <thead>
+              <tr>
+                <th scope="col">画面</th>
+                <th scope="col">内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ログイン・会員登録</td>
+                <td>電話番号・パスワード、新規会員登録、登録情報の追加・更新</td>
+              </tr>
+              <tr>
+                <td>ご注文一覧</td>
+                <td>履歴一覧、新規ご注文・再注文・マイページへの導線</td>
+              </tr>
+              <tr>
+                <td>新規・再注文</td>
+                <td>お届け先・商品・<strong>お届け希望日時（第三希望まで）</strong>・お支払いの入力</td>
+              </tr>
+              <tr>
+                <td>確認・完了</td>
+                <td>内容の最終確認、送信完了メッセージ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-label="管理画面">
+      <header class="slide-header">
+        <span class="slide-kicker">04</span>
+        <h2>運用者向け管理画面</h2>
+      </header>
+      <div class="slide-body">
+        <p>初期スコープでは、次の<strong>3 機能ブロック</strong>に限定して想定しています。</p>
+        <div class="slide-table-wrap">
+          <table class="slide-table">
+            <thead>
+              <tr>
+                <th scope="col">機能</th>
+                <th scope="col">内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ログイン</td>
+                <td>運用者認証</td>
+              </tr>
+              <tr>
+                <td>ユーザー管理</td>
+                <td>会員の一覧・参照、<strong>パスワード変更</strong>、<strong>CSV 出力</strong></td>
+              </tr>
+              <tr>
+                <td>申込管理</td>
+                <td>申込の一覧・参照、<strong>CSV 出力</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>商品マスタの編集は本画面からは行わず、別途の運用（ファイル連携等）を想定します。</p>
+      </div>
+    </section>
+
+    <section class="slide" aria-label="スコープ">
+      <header class="slide-header">
+        <span class="slide-kicker">05</span>
+        <h2>初期スコープと今後の拡張</h2>
+      </header>
+      <div class="slide-body">
+        <div class="slide-grid-2">
+          <div class="slide-col">
+            <h3>初期に含める想定</h3>
+            <ul>
+              <li>オンライン申込フロー一式</li>
+              <li>管理画面（ログイン・ユーザー・申込）</li>
+              <li>レスポンシブで最低限利用可能な表示</li>
+            </ul>
+          </div>
+          <div class="slide-col">
+            <h3>要件外（フェーズで協議）</h3>
+            <ul>
+              <li>在庫のシステム管理・発送ステータス連携</li>
+              <li>利用者によるパスワードのセルフ変更</li>
+              <li>メールアドレスの有効性検証、申込取り消し機能</li>
+              <li>商品検索・画像ギャラリー、手の込んだモバイル最適化</li>
+            </ul>
+          </div>
+        </div>
+        <div class="slide-note">
+          <p>ブラウザは <strong>Safari / Chrome 最新版</strong>、管理者アカウントは初期おおよそ <strong>3 件（SE 対応で作成）</strong>を想定しています。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-label="スケジュール">
+      <header class="slide-header">
+        <span class="slide-kicker">06</span>
+        <h2>概算スケジュール（参考）</h2>
+      </header>
+      <div class="slide-body">
+        <div class="slide-table-wrap">
+          <table class="slide-table">
+            <thead>
+              <tr>
+                <th scope="col">時期</th>
+                <th scope="col">内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>4月</td>
+                <td>発注</td>
+              </tr>
+              <tr>
+                <td>5〜6月</td>
+                <td>要件定義・デザイン</td>
+              </tr>
+              <tr>
+                <td>6月末</td>
+                <td>再見積り・開発工程の発注</td>
+              </tr>
+              <tr>
+                <td>7月上旬</td>
+                <td>設計</td>
+              </tr>
+              <tr>
+                <td>7月下旬〜8月</td>
+                <td>開発</td>
+              </tr>
+              <tr>
+                <td>9月</td>
+                <td>テスト・微修正</td>
+              </tr>
+              <tr>
+                <td>10月下旬</td>
+                <td>ローンチ想定</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide" aria-label="デモと次のステップ">
+      <header class="slide-header">
+        <span class="slide-kicker">07</span>
+        <h2>本リポジトリのデモについて</h2>
+      </header>
+      <div class="slide-body">
+        <p><code>apply_demo/htdocs</code> 配下の HTML は、上記の画面イメージ・導線を<strong>静的デモ</strong>としてまとめたものです。実装仕様・API・本番データ連携は含みません。</p>
+        <ul>
+          <li>利用者：ログイン、会員登録、注文一覧、新規／再注文、確認画面など</li>
+          <li>管理者：<code>admin/</code> のログイン、ユーザー管理、申込一覧・詳細</li>
+        </ul>
+        <div class="slide-note">
+          <p>詳細な画面デザイン・項目定義・データ連携は要件定義で確定後、<strong>開発見積の再提出（再見積もり）</strong>を前提としています。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide slide--title-only" aria-label="締め">
+      <div class="slide-title-only-inner">
+        <h1>ご検討のほど、よろしくお願いいたします</h1>
+        <p class="slide-lead">ご質問・すり合わせはお気軽にお知らせください</p>
+        <p class="slide-meta">ご進物申込・申し込みシステム</p>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>

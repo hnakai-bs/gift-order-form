@@ -75,14 +75,20 @@
         if (!tbody) return;
 
         var sortState = { col: "date", dir: "desc" };
+        /** 各「検索」ボタン押下時のみ反映（入力中は一覧を変えない） */
+        var appliedUsersFilter = { q: "", from: "", to: "" };
 
         function getFilteredRows() {
-            var q = getVal("admin-users-search");
-            var from = getVal("admin-users-from");
-            var to = getVal("admin-users-to");
             var rows = mock.users.slice();
-            rows = U.filterBySearch(rows, q, ["name", "kana", "company", "companyKana", "email", "tel"]);
-            rows = U.filterByPeriod(rows, "latestOrderDate", from, to);
+            rows = U.filterBySearch(rows, appliedUsersFilter.q, [
+                "name",
+                "kana",
+                "company",
+                "companyKana",
+                "email",
+                "tel",
+            ]);
+            rows = U.filterByPeriod(rows, "latestOrderDate", appliedUsersFilter.from, appliedUsersFilter.to);
             return rows;
         }
 
@@ -96,9 +102,9 @@
         }
 
         function applySortMenuChoice(thCol, choice) {
-            if (thCol === "date") {
-                if (choice === "date_desc") sortState = { col: "date", dir: "desc" };
-                else if (choice === "date_asc") sortState = { col: "date", dir: "asc" };
+            if (thCol === "email") {
+                if (choice === "email_desc") sortState = { col: "email", dir: "desc" };
+                else if (choice === "email_asc") sortState = { col: "email", dir: "asc" };
                 return;
             }
             if (choice === "gojuon") {
@@ -123,8 +129,8 @@
 
             tbody.innerHTML = rows
                 .map(function (u) {
-                    var dateCell = u.latestOrderDate
-                        ? escapeHtml(U.formatYmdJa(u.latestOrderDate, false))
+                    var emailCell = u.email
+                        ? escapeHtml(u.email)
                         : '<span class="muted">—</span>';
                     var editHref = "user_edit.html?id=" + encodeURIComponent(u.id);
                     return (
@@ -132,8 +138,8 @@
                         escapeHtml(u.name) +
                         "</td><td>" +
                         escapeHtml(u.company || "—") +
-                        "</td><td class=\"cell-date\">" +
-                        dateCell +
+                        "</td><td class=\"cell-email\">" +
+                        emailCell +
                         "</td><td class=\"cell-actions\"><a class=\"admin-link-btn\" href=\"" +
                         editHref +
                         "\"><span class=\"material-icons-outlined\" aria-hidden=\"true\">edit</span>編集する</a></td></tr>"
@@ -173,9 +179,9 @@
                 var details = opt.closest(".admin-col-sort");
                 if (!details) return;
                 var thCol = details.getAttribute("data-sort-col");
-                if (thCol !== "name" && thCol !== "company" && thCol !== "date") return;
-                if (thCol === "date") {
-                    if (choice !== "date_desc" && choice !== "date_asc") return;
+                if (thCol !== "name" && thCol !== "company" && thCol !== "email") return;
+                if (thCol === "email") {
+                    if (choice !== "email_desc" && choice !== "email_asc") return;
                 } else if (choice !== "gojuon" && choice !== "date") {
                     return;
                 }
@@ -185,10 +191,44 @@
             });
         }
 
-        ["admin-users-search", "admin-users-from", "admin-users-to"].forEach(function (id) {
-            var el = document.getElementById(id);
-            if (el) el.addEventListener("input", render);
-        });
+        function applyUsersKeywordFilter() {
+            appliedUsersFilter.q = getVal("admin-users-search");
+            render();
+        }
+
+        function applyUsersPeriodFilter() {
+            appliedUsersFilter.from = getVal("admin-users-from");
+            appliedUsersFilter.to = getVal("admin-users-to");
+            render();
+        }
+
+        function resetUsersFilters() {
+            appliedUsersFilter = { q: "", from: "", to: "" };
+            ["admin-users-search", "admin-users-from", "admin-users-to"].forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) el.value = "";
+            });
+            render();
+        }
+
+        var usersSearchBtn = document.getElementById("admin-users-search-btn");
+        if (usersSearchBtn) usersSearchBtn.addEventListener("click", applyUsersKeywordFilter);
+
+        var usersPeriodSearchBtn = document.getElementById("admin-users-period-search-btn");
+        if (usersPeriodSearchBtn) usersPeriodSearchBtn.addEventListener("click", applyUsersPeriodFilter);
+
+        var usersResetBtn = document.getElementById("admin-users-filter-reset");
+        if (usersResetBtn) usersResetBtn.addEventListener("click", resetUsersFilters);
+
+        var usersSearchInput = document.getElementById("admin-users-search");
+        if (usersSearchInput) {
+            usersSearchInput.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    applyUsersKeywordFilter();
+                }
+            });
+        }
 
         var csvBtn = document.getElementById("admin-users-csv");
         if (csvBtn) csvBtn.addEventListener("click", exportCsv);
@@ -205,14 +245,13 @@
         if (!tbody) return;
 
         var sortState = { col: "date", dir: "desc" };
+        /** 各「検索」ボタン押下時のみ反映（入力中は一覧を変えない） */
+        var appliedAppsFilter = { q: "", from: "", to: "" };
 
         function getFilteredRows() {
-            var q = getVal("admin-apps-search");
-            var from = getVal("admin-apps-from");
-            var to = getVal("admin-apps-to");
             var rows = mock.orders.slice();
-            rows = U.filterBySearch(rows, q, ["ordererName", "destName", "content"]);
-            rows = U.filterByPeriod(rows, "date", from, to);
+            rows = U.filterBySearch(rows, appliedAppsFilter.q, ["ordererName", "destName", "content"]);
+            rows = U.filterByPeriod(rows, "date", appliedAppsFilter.from, appliedAppsFilter.to);
             return rows;
         }
 
@@ -260,7 +299,7 @@
                         dateCell +
                         "</td><td>" +
                         escapeHtml(o.ordererName) +
-                        "</td><td class=\"cell-name\">" +
+                        "</td><td class=\"cell-name2\">" +
                         escapeHtml(o.destName) +
                         "</td><td class=\"cell-order-content\">" +
                         orderContentCellHtml(o.content) +
@@ -308,10 +347,45 @@
             });
         }
 
-        ["admin-apps-search", "admin-apps-from", "admin-apps-to"].forEach(function (id) {
-            var el = document.getElementById(id);
-            if (el) el.addEventListener("input", render);
-        });
+        function applyKeywordFilter() {
+            appliedAppsFilter.q = getVal("admin-apps-search");
+            render();
+        }
+
+        function applyPeriodFilter() {
+            appliedAppsFilter.from = getVal("admin-apps-from");
+            appliedAppsFilter.to = getVal("admin-apps-to");
+            render();
+        }
+
+        function resetAppsFilters() {
+            appliedAppsFilter = { q: "", from: "", to: "" };
+            var ids = ["admin-apps-search", "admin-apps-from", "admin-apps-to"];
+            ids.forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) el.value = "";
+            });
+            render();
+        }
+
+        var searchBtn = document.getElementById("admin-apps-search-btn");
+        if (searchBtn) searchBtn.addEventListener("click", applyKeywordFilter);
+
+        var periodSearchBtn = document.getElementById("admin-apps-period-search-btn");
+        if (periodSearchBtn) periodSearchBtn.addEventListener("click", applyPeriodFilter);
+
+        var resetBtn = document.getElementById("admin-apps-filter-reset");
+        if (resetBtn) resetBtn.addEventListener("click", resetAppsFilters);
+
+        var searchInput = document.getElementById("admin-apps-search");
+        if (searchInput) {
+            searchInput.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    applyKeywordFilter();
+                }
+            });
+        }
 
         var csvBtn = document.getElementById("admin-apps-csv");
         if (csvBtn) csvBtn.addEventListener("click", exportCsv);
