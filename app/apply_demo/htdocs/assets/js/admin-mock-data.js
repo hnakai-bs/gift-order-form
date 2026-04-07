@@ -146,6 +146,8 @@
             {
                 id: "o1",
                 date: "2026-03-30",
+                appliedAt: "2026-03-30T14:35:00",
+                managementNo: "384521",
                 ordererName: "山田 太郎（株式会社エービーシー）",
                 destName: "株式会社エービーシー 山田 太郎 様",
                 content: orderContentFromProducts(orderDetails.o1.products),
@@ -153,6 +155,8 @@
             {
                 id: "o2",
                 date: "2026-04-01",
+                appliedAt: "2026-04-01T09:12:00",
+                managementNo: "192834",
                 ordererName: "佐藤 花子（有限会社サンプル商事）",
                 destName: "佐藤 花子 様",
                 content: orderContentFromProducts(orderDetails.o2.products),
@@ -160,6 +164,8 @@
             {
                 id: "o3",
                 date: "2026-04-02",
+                appliedAt: "2026-04-02T16:48:00",
+                managementNo: "501928",
                 ordererName: "高橋 美咲（合同会社グリーン）",
                 destName: "合同会社グリーン 御中",
                 content: orderContentFromProducts(orderDetails.o3.products),
@@ -167,6 +173,8 @@
             {
                 id: "o4",
                 date: "2026-02-20",
+                appliedAt: "2026-02-20T11:05:00",
+                managementNo: "673019",
                 ordererName: "鈴木 一郎（株式会社テックリンク）",
                 destName: "鈴木 一郎 様",
                 content: orderContentFromProducts(orderDetails.o4.products),

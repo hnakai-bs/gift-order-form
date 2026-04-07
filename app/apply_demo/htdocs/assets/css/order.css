@@ -959,6 +959,59 @@ body.order-detail-modal-open {
     outline-offset: 2px;
 }
 
+.btn-summary-email-verify:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.summary-email-set {
+    text-align: center;
+}
+
+.summary-email-set__value {
+    margin: 0 0 16px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    word-break: break-all;
+    color: var(--text-color);
+}
+
+.summary-email-set__change {
+    margin: 0;
+    padding: 12px 16px;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+}
+
+.summary-email-edit {
+    text-align: center;
+}
+
+.summary-email-row--stack {
+    flex-wrap: wrap;
+}
+
+.summary-email-edit__cancel {
+    margin-top: 14px;
+    padding: 0;
+    border: none;
+    background: none;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.summary-email-edit__cancel:hover {
+    color: var(--text-color);
+}
+
+.summary-email-edit__cancel:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
 .email-verify-modal__body .email-verify-modal__text {
     margin: 0 0 16px;
     font-size: 0.9rem;
@@ -971,6 +1024,43 @@ body.order-detail-modal-open {
     font-size: 0.82rem;
     color: var(--text-light);
     word-break: break-all;
+}
+
+.email-verify-modal__scope {
+    margin: 0 0 20px;
+    padding: 16px 0 4px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    text-align: left;
+}
+
+.email-verify-modal__scope-title {
+    margin: 0 0 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.email-verify-modal__scope-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 0 10px;
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.email-verify-modal__scope-label:last-of-type {
+    margin-bottom: 0;
+}
+
+.email-verify-modal__scope-label input[type="radio"] {
+    flex-shrink: 0;
+    width: 1.05em;
+    height: 1.05em;
+    margin-top: 0.2em;
+    accent-color: var(--primary-color);
 }
 
 .email-verify-modal__code-group {
@@ -996,6 +1086,17 @@ body.order-detail-modal-open {
 
 .email-verify-done-modal__message {
     margin-bottom: 28px !important;
+}
+
+.email-verify-done-modal__body:has(.email-verify-done-modal__note) .email-verify-done-modal__message {
+    margin-bottom: 12px !important;
+}
+
+.email-verify-done-modal__note {
+    margin: 0 0 28px;
+    font-size: 0.82rem;
+    line-height: 1.75;
+    color: var(--text-light);
 }
 
 .email-verify-done-modal__link {

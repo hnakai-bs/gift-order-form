@@ -328,6 +328,42 @@
     gap: 18px;
 }
 
+.admin-apps-filter-main-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px 24px;
+    width: 100%;
+}
+
+.admin-apps-filter-main-row > .admin-apps-filter-row {
+    width: auto;
+}
+
+.admin-apps-filter-main-row > .admin-apps-filter-row--stacked-keyword {
+    flex: 2 1 260px;
+    min-width: 0;
+}
+
+.admin-apps-filter-main-row > .admin-apps-filter-period-split {
+    flex: 1 1 300px;
+    min-width: 0;
+    width: auto;
+    max-width: 100%;
+}
+
+.admin-apps-filter-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 10px 12px;
+    flex: 0 0 auto;
+}
+
+.admin-apps-filter-main-row > .admin-apps-filter-actions {
+    margin-left: auto;
+}
+
 .admin-apps-filter-row {
     display: flex;
     flex-wrap: wrap;
@@ -338,6 +374,43 @@
 
 .admin-apps-filter-row--keyword {
     gap: 12px 14px;
+}
+
+.admin-apps-filter-row--stacked-keyword {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.admin-apps-filter-row--stacked-keyword .admin-field {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+}
+
+.admin-apps-filter-period-split {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    gap: 16px;
+    width: 100%;
+}
+
+.admin-apps-filter-period-col {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.admin-apps-filter-period-col .admin-field input[type="date"] {
+    width: 100%;
+    min-width: 0;
+}
+
+.admin-apps-filter-row--stacked-keyword .admin-field input[type="search"] {
+    width: 100%;
+}
+
+.admin-apps-filter-row--submit {
+    justify-content: flex-end;
 }
 
 .admin-field-inline {
@@ -367,8 +440,38 @@
     justify-content: flex-end;
 }
 
+@media (max-width: 720px) {
+    .admin-apps-filter-main-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-apps-filter-main-row > .admin-apps-filter-row {
+        width: 100%;
+    }
+
+    .admin-apps-filter-main-row > .admin-apps-filter-actions {
+        margin-left: 0;
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
 @media (max-width: 520px) {
     .admin-apps-filter-row--reset .admin-btn {
+        width: 100%;
+    }
+
+    .admin-apps-filter-row--submit .admin-btn {
+        width: 100%;
+    }
+
+    .admin-apps-filter-actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .admin-apps-filter-actions .admin-btn {
         width: 100%;
     }
 }
@@ -385,17 +488,6 @@
 /* 列ソートのパネルが下方向にはみ出すため、一覧テーブル付きカードではクリップしない */
 .admin-page-card:has(.admin-col-sort) {
     overflow: visible;
-}
-
-/* overflow: visible でもカードの角丸は元と同じ --admin-radius（12px）で揃える */
-.admin-page-card:has(.admin-col-sort) .admin-page-card__body {
-    border-top-left-radius: var(--admin-radius);
-    border-top-right-radius: var(--admin-radius);
-}
-
-.admin-page-card:has(.admin-col-sort) .admin-table-wrap {
-    border-bottom-left-radius: var(--admin-radius);
-    border-bottom-right-radius: var(--admin-radius);
 }
 
 .admin-page-card__head {
@@ -652,7 +744,10 @@
 
 .admin-table-wrap--in-card {
     border: none;
-    border-radius: 0;
+    /* collapse では th/td の角丸が効かないため、ラッパーで四隅をクリップする */
+    border-radius: var(--admin-radius);
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .admin-data-table {
@@ -739,7 +834,7 @@
     position: absolute;
     right: 0;
     top: calc(100% + 6px);
-    min-width: 200px;
+    min-width: 160px;
     padding: 6px;
     background: var(--admin-surface);
     border: 1px solid var(--admin-border);
@@ -792,17 +887,29 @@
     background: rgba(37, 99, 235, 0.04);
 }
 
-/* 日付列（申込日・直近注文日など）—「2026年12月31日」が折り返さない幅 */
+/* 日付列（申し込み日時など）—「2026年12月31日 14:35」が折り返さない幅 */
 .admin-data-table thead th:has(.admin-col-sort[data-sort-col="date"]) {
-    min-width: 12rem;
+    min-width: 14rem;
 }
 
 .admin-data-table td.cell-date {
-    min-width: 12rem;
+    min-width: 14rem;
     white-space: nowrap;
 }
 
-.admin-data-table thead th:has(.admin-col-sort[data-sort-col="email"]) {
+.admin-data-table thead th.admin-th--management-no {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.admin-data-table td.cell-management-no {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    color: var(--admin-text-muted);
+    font-size: 0.8125rem;
+}
+
+.admin-data-table thead th.admin-th--email-col {
     min-width: 14rem;
 }
 

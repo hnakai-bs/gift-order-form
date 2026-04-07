@@ -75,7 +75,7 @@
         if (!tbody) return;
 
         var sortState = { col: "date", dir: "desc" };
-        /** 各「検索」ボタン押下時のみ反映（入力中は一覧を変えない） */
+        /** 「検索」ボタン押下時のみ反映（入力中は一覧を変えない） */
         var appliedUsersFilter = { q: "", from: "", to: "" };
 
         function getFilteredRows() {
@@ -102,11 +102,6 @@
         }
 
         function applySortMenuChoice(thCol, choice) {
-            if (thCol === "email") {
-                if (choice === "email_desc") sortState = { col: "email", dir: "desc" };
-                else if (choice === "email_asc") sortState = { col: "email", dir: "asc" };
-                return;
-            }
             if (choice === "gojuon") {
                 if (thCol === "name") sortState = { col: "name", dir: "asc" };
                 else if (thCol === "company") sortState = { col: "company", dir: "asc" };
@@ -179,12 +174,8 @@
                 var details = opt.closest(".admin-col-sort");
                 if (!details) return;
                 var thCol = details.getAttribute("data-sort-col");
-                if (thCol !== "name" && thCol !== "company" && thCol !== "email") return;
-                if (thCol === "email") {
-                    if (choice !== "email_desc" && choice !== "email_asc") return;
-                } else if (choice !== "gojuon" && choice !== "date") {
-                    return;
-                }
+                if (thCol !== "name" && thCol !== "company") return;
+                if (choice !== "gojuon" && choice !== "date") return;
                 applySortMenuChoice(thCol, choice);
                 details.removeAttribute("open");
                 render();
@@ -202,6 +193,13 @@
             render();
         }
 
+        function applyUsersFiltersCombined() {
+            appliedUsersFilter.q = getVal("admin-users-search");
+            appliedUsersFilter.from = getVal("admin-users-from");
+            appliedUsersFilter.to = getVal("admin-users-to");
+            render();
+        }
+
         function resetUsersFilters() {
             appliedUsersFilter = { q: "", from: "", to: "" };
             ["admin-users-search", "admin-users-from", "admin-users-to"].forEach(function (id) {
@@ -211,11 +209,16 @@
             render();
         }
 
-        var usersSearchBtn = document.getElementById("admin-users-search-btn");
-        if (usersSearchBtn) usersSearchBtn.addEventListener("click", applyUsersKeywordFilter);
+        var usersFilterSubmit = document.getElementById("admin-users-filter-submit");
+        if (usersFilterSubmit) {
+            usersFilterSubmit.addEventListener("click", applyUsersFiltersCombined);
+        } else {
+            var usersSearchBtn = document.getElementById("admin-users-search-btn");
+            if (usersSearchBtn) usersSearchBtn.addEventListener("click", applyUsersKeywordFilter);
 
-        var usersPeriodSearchBtn = document.getElementById("admin-users-period-search-btn");
-        if (usersPeriodSearchBtn) usersPeriodSearchBtn.addEventListener("click", applyUsersPeriodFilter);
+            var usersPeriodSearchBtn = document.getElementById("admin-users-period-search-btn");
+            if (usersPeriodSearchBtn) usersPeriodSearchBtn.addEventListener("click", applyUsersPeriodFilter);
+        }
 
         var usersResetBtn = document.getElementById("admin-users-filter-reset");
         if (usersResetBtn) usersResetBtn.addEventListener("click", resetUsersFilters);
@@ -225,7 +228,8 @@
             usersSearchInput.addEventListener("keydown", function (e) {
                 if (e.key === "Enter") {
                     e.preventDefault();
-                    applyUsersKeywordFilter();
+                    if (usersFilterSubmit) applyUsersFiltersCombined();
+                    else applyUsersKeywordFilter();
                 }
             });
         }
@@ -245,12 +249,17 @@
         if (!tbody) return;
 
         var sortState = { col: "date", dir: "desc" };
-        /** 各「検索」ボタン押下時のみ反映（入力中は一覧を変えない） */
+        /** 「検索」ボタン押下時のみ反映（入力中は一覧を変えない） */
         var appliedAppsFilter = { q: "", from: "", to: "" };
 
         function getFilteredRows() {
             var rows = mock.orders.slice();
-            rows = U.filterBySearch(rows, appliedAppsFilter.q, ["ordererName", "destName", "content"]);
+            rows = U.filterBySearch(rows, appliedAppsFilter.q, [
+                "ordererName",
+                "destName",
+                "content",
+                "managementNo",
+            ]);
             rows = U.filterByPeriod(rows, "date", appliedAppsFilter.from, appliedAppsFilter.to);
             return rows;
         }
@@ -264,17 +273,9 @@
         }
 
         function applySortMenuChoice(thCol, choice) {
-            if (thCol === "date") {
-                if (choice === "date_desc") sortState = { col: "date", dir: "desc" };
-                else if (choice === "date_asc") sortState = { col: "date", dir: "asc" };
-                return;
-            }
-            if (choice === "gojuon") {
-                if (thCol === "orderer") sortState = { col: "orderer", dir: "asc" };
-                else if (thCol === "dest") sortState = { col: "dest", dir: "asc" };
-            } else if (choice === "date") {
-                sortState = { col: "date", dir: "desc" };
-            }
+            if (thCol !== "date") return;
+            if (choice === "date_desc") sortState = { col: "date", dir: "desc" };
+            else if (choice === "date_asc") sortState = { col: "date", dir: "asc" };
         }
 
         function render() {
@@ -283,20 +284,27 @@
 
             if (!rows.length) {
                 tbody.innerHTML =
-                    '<tr><td colspan="5" style="text-align:center;color:var(--admin-text-muted, #64748b);padding:28px;">条件に一致するお申し込みが見つかりません。</td></tr>';
+                    '<tr><td colspan="6" style="text-align:center;color:var(--admin-text-muted, #64748b);padding:28px;">条件に一致するお申し込みが見つかりません。</td></tr>';
                 resetSortHeaderVisualState();
                 return;
             }
 
             tbody.innerHTML = rows
                 .map(function (o) {
-                    var dateCell = o.date
-                        ? escapeHtml(U.formatYmdJa(o.date, false))
+                    var dtSrc = o.appliedAt || o.date;
+                    var dateCell = dtSrc
+                        ? escapeHtml(U.formatYmdHmJa(dtSrc))
                         : '<span class="muted">—</span>';
+                    var mgmtCell =
+                        o.managementNo != null && String(o.managementNo).trim()
+                            ? escapeHtml(String(o.managementNo).trim())
+                            : '<span class="muted">—</span>';
                     var detailHref = "order_detail.html?id=" + encodeURIComponent(o.id);
                     return (
                         "<tr><td class=\"cell-date\">" +
                         dateCell +
+                        "</td><td class=\"cell-management-no\">" +
+                        mgmtCell +
                         "</td><td>" +
                         escapeHtml(o.ordererName) +
                         "</td><td class=\"cell-name2\">" +
@@ -317,9 +325,10 @@
             rows = U.sortOrdersByColumn(rows, sortState.col, sortState.dir);
             U.downloadCsv(
                 "applications_export.csv",
-                ["申込日", "ご注文者", "お届け先宛名", "注文内容", "ID"],
+                ["申し込み日時", "管理No.", "ご注文者", "お届け先宛名", "注文内容", "ID"],
                 rows.map(function (o) {
-                    return [o.date, o.ordererName, o.destName, o.content, o.id];
+                    var dt = o.appliedAt || o.date || "";
+                    return [dt, o.managementNo != null ? o.managementNo : "", o.ordererName, o.destName, o.content, o.id];
                 })
             );
         }
@@ -335,12 +344,8 @@
                 var details = opt.closest(".admin-col-sort");
                 if (!details) return;
                 var thCol = details.getAttribute("data-sort-col");
-                if (thCol !== "date" && thCol !== "orderer" && thCol !== "dest") return;
-                if (thCol === "date") {
-                    if (choice !== "date_desc" && choice !== "date_asc") return;
-                } else if (choice !== "gojuon" && choice !== "date") {
-                    return;
-                }
+                if (thCol !== "date") return;
+                if (choice !== "date_desc" && choice !== "date_asc") return;
                 applySortMenuChoice(thCol, choice);
                 details.removeAttribute("open");
                 render();
@@ -358,6 +363,13 @@
             render();
         }
 
+        function applyAppsFiltersCombined() {
+            appliedAppsFilter.q = getVal("admin-apps-search");
+            appliedAppsFilter.from = getVal("admin-apps-from");
+            appliedAppsFilter.to = getVal("admin-apps-to");
+            render();
+        }
+
         function resetAppsFilters() {
             appliedAppsFilter = { q: "", from: "", to: "" };
             var ids = ["admin-apps-search", "admin-apps-from", "admin-apps-to"];
@@ -368,11 +380,16 @@
             render();
         }
 
-        var searchBtn = document.getElementById("admin-apps-search-btn");
-        if (searchBtn) searchBtn.addEventListener("click", applyKeywordFilter);
+        var appsFilterSubmit = document.getElementById("admin-apps-filter-submit");
+        if (appsFilterSubmit) {
+            appsFilterSubmit.addEventListener("click", applyAppsFiltersCombined);
+        } else {
+            var searchBtn = document.getElementById("admin-apps-search-btn");
+            if (searchBtn) searchBtn.addEventListener("click", applyKeywordFilter);
 
-        var periodSearchBtn = document.getElementById("admin-apps-period-search-btn");
-        if (periodSearchBtn) periodSearchBtn.addEventListener("click", applyPeriodFilter);
+            var periodSearchBtn = document.getElementById("admin-apps-period-search-btn");
+            if (periodSearchBtn) periodSearchBtn.addEventListener("click", applyPeriodFilter);
+        }
 
         var resetBtn = document.getElementById("admin-apps-filter-reset");
         if (resetBtn) resetBtn.addEventListener("click", resetAppsFilters);
@@ -382,7 +399,8 @@
             searchInput.addEventListener("keydown", function (e) {
                 if (e.key === "Enter") {
                     e.preventDefault();
-                    applyKeywordFilter();
+                    if (appsFilterSubmit) applyAppsFiltersCombined();
+                    else applyKeywordFilter();
                 }
             });
         }

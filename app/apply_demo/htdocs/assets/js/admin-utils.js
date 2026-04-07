@@ -163,8 +163,8 @@
         var copy = items.slice();
         if (column === "date") {
             copy.sort(function (a, b) {
-                var da = a.date || "";
-                var db = b.date || "";
+                var da = a.appliedAt || a.date || "";
+                var db = b.appliedAt || b.date || "";
                 if (!da && !db) return 0;
                 if (!da) return 1;
                 if (!db) return -1;
@@ -217,6 +217,19 @@
         return base + "(" + w + ")";
     }
 
+    /** 「2026-03-30T14:35」または日付のみ → 「2026年3月30日 14:35」 */
+    function formatYmdHmJa(isoOrYmd) {
+        if (!isoOrYmd) return "—";
+        var m = String(isoOrYmd).match(/^(\d{4})-(\d{2})-(\d{2})(?:[T ](\d{2}):(\d{2})(?::(\d{2}))?)?/);
+        if (!m) return String(isoOrYmd);
+        var y = Number(m[1]);
+        var mo = Number(m[2]);
+        var day = Number(m[3]);
+        var h = m[4] != null ? Number(m[4]) : 0;
+        var min = m[5] != null ? Number(m[5]) : 0;
+        return y + "年" + mo + "月" + day + "日 " + pad(h) + ":" + pad(min);
+    }
+
     window.AdminUtils = {
         startOfWeekMonday: startOfWeekMonday,
         endOfWeekSunday: endOfWeekSunday,
@@ -227,6 +240,7 @@
         sortOrdersByColumn: sortOrdersByColumn,
         downloadCsv: downloadCsv,
         formatYmdJa: formatYmdJa,
+        formatYmdHmJa: formatYmdHmJa,
         pad: pad,
     };
 })();

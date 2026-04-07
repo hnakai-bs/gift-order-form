@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>新規ご注文 | ご進物お申込み</title>
+    <title>同一内容でご注文（メール登録済） | ご進物お申込み</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500&family=Noto+Serif+JP:wght@300;500&display=swap" rel="stylesheet">
@@ -29,15 +29,15 @@
 
     <main class="container">
         <header class="app-page-header">
-            <h1 class="app-page-heading">新規ご注文</h1>
-            <p class="page-lead">宛名・お届け先・ご注文内容をご入力のうえ、ご注文いただけます。</p>
+            <h1 class="app-page-heading">同一内容でご注文</h1>
+            <p class="page-lead">宛名やお届け先、注文内容を編集のうえ、ご注文いただけます。</p>
         </header>
 
         <form action="order_confirm.html" method="POST">
             <div class="order-setup-grid">
-
+                
                 <div class="setup-main">
-
+                    
                     <section class="setup-section">
                         <div class="setup-section-header">
                             <h2 class="setup-section-title serif">お届け先情報</h2>
@@ -46,21 +46,21 @@
                         <div class="setup-card">
                             <div class="form-group">
                                 <label>宛名（会社名・お名前）</label>
-                                <input type="text" name="dest_name" value="" class="input-underline" placeholder="例：株式会社〇〇 山田 太郎 様">
+                                <input type="text" name="dest_name" value="株式会社エービーシー 山田 太郎 様" class="input-underline">
                             </div>
                             <div class="form-row">
                                 <div class="form-group" style="flex: 0 0 150px;">
                                     <label>郵便番号</label>
-                                    <input type="text" name="zip" value="" class="input-underline" placeholder="例：100-0001">
+                                    <input type="text" name="zip" value="100-0001" class="input-underline">
                                 </div>
                                 <div class="form-group flex-1">
                                     <label>住所</label>
-                                    <input type="text" name="address" value="" class="input-underline" placeholder="都道府県から番地・建物名まで">
+                                    <input type="text" name="address" value="東京都千代田区千代田1-1-1 〇〇ビル 10F" class="input-underline">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>電話番号</label>
-                                <input type="tel" name="tel" value="" class="input-underline w-medium" placeholder="例：03-1234-5678">
+                                <input type="tel" name="tel" value="03-1234-5678" class="input-underline w-medium">
                             </div>
                         </div>
                     </section>
@@ -92,7 +92,7 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <input type="text" name="product_code" value="" class="input-underline-mini" placeholder="例：A-101" aria-label="商品番号">
+                                            <input type="text" name="product_code" value="A-101" class="input-underline-mini" aria-label="商品番号">
                                         </td>
                                         <td class="text-center">
                                             <button type="button" class="btn-product-confirm">確認</button>
@@ -107,7 +107,7 @@
                                                 <button type="button" class="qty-stepper__btn" data-qty-step="1" aria-label="数量を増やす">+</button>
                                             </div>
                                         </td>
-                                        <td data-demo-subtotal>—</td>
+                                        <td data-demo-subtotal>2,000円</td>
                                         <td class="text-center">
                                             <button type="button" class="btn-delete">
                                                 <span class="material-icons-outlined">delete_outline</span>
@@ -121,7 +121,7 @@
                                 <p class="add-label">追加注文（商品番号入力）</p>
                                 <div class="add-inputs">
                                     <input type="text" id="demo-add-product-code" placeholder="例：B-202" class="input-underline-mini" value="" aria-label="追加する商品番号">
-                                    <button type="button" class="btn-product-confirm" id="demo-add-product-confirm" aria-label="商品番号を確認">確認</button>
+                                    <button type="button" class="btn-product-confirm" aria-label="商品番号を確認">確認</button>
                                     <span class="add-line-unit-preview" data-demo-add-unit aria-live="polite">—</span>
                                     <div class="qty-control qty-control--inline">
                                         <button type="button" class="qty-stepper__btn" data-qty-step="-1" aria-label="数量を減らす">−</button>
@@ -180,11 +180,11 @@
                             <div class="form-row">
                                 <div class="form-group flex-1">
                                     <label>お届け希望日</label>
-                                    <input type="date" name="delivery_date" value="" class="input-underline">
+                                    <input type="date" class="input-underline">
                                 </div>
                                 <div class="form-group flex-1">
                                     <label>お届け時間帯</label>
-                                    <select name="delivery_time" class="input-underline">
+                                    <select class="input-underline">
                                         <option>指定なし</option>
                                         <option>午前中</option>
                                         <option>14時〜16時</option>
@@ -203,22 +203,22 @@
                         <h3 class="summary-title serif">お支払い合計</h3>
                         <div class="summary-row">
                             <span>商品合計</span>
-                            <span data-demo-summary="products">0円</span>
+                            <span data-demo-summary="products">2,000円</span>
                         </div>
                         <div class="summary-row">
                             <span>送料</span>
-                            <span data-demo-summary="shipping">—</span>
+                            <span data-demo-summary="shipping">880円</span>
                         </div>
                         <div class="summary-total">
                             <span class="total-label">合計金額（税込）</span>
-                            <span class="total-amount" data-demo-summary="grand">—</span>
+                            <span class="total-amount" data-demo-summary="grand">2,880円</span>
                         </div>
 
                         <fieldset class="summary-payment-fieldset">
                             <legend class="summary-payment-legend serif">お支払い方法を選択する</legend>
                             <div class="summary-payment-options">
                                 <label class="summary-payment-label">
-                                    <input type="radio" name="payment_method" value="bank_transfer">
+                                    <input type="radio" name="payment_method" value="bank_transfer" checked>
                                     <span>銀行振込</span>
                                 </label>
                                 <label class="summary-payment-label">
@@ -230,14 +230,23 @@
 
                         <fieldset class="summary-email-fieldset">
                             <legend class="summary-email-legend serif">ご注文確認を受信するメールアドレス</legend>
-                            <div class="summary-email-row">
-                                <input type="email" name="order_confirm_email" id="order-confirm-email-input" class="input-underline summary-email-input" placeholder="例：example@example.com" autocomplete="email" aria-label="ご注文確認メールを受信するメールアドレス">
-                                <button type="button" class="btn-summary-email-verify" id="btn-order-email-verify">認証する</button>
+                            <div class="summary-email-set" id="summary-email-set-block">
+                                <p class="summary-email-set__value" id="summary-email-display">sample@example.co.jp</p>
+                                <button type="button" class="btn btn-outline btn-full summary-email-set__change" id="btn-summary-email-change">変更する</button>
                             </div>
+                            <div class="summary-email-edit" id="summary-email-edit-block" hidden>
+                                <div class="summary-email-row summary-email-row--stack">
+                                    <input type="email" name="order_confirm_email" id="order-confirm-email-input" class="input-underline summary-email-input" placeholder="例：example@example.com" autocomplete="email" aria-label="ご注文確認メールを受信するメールアドレス" value="">
+                                    <button type="button" class="btn-summary-email-verify" id="btn-order-email-verify">認証する</button>
+                                </div>
+                                <button type="button" class="summary-email-edit__cancel" id="btn-summary-email-cancel">キャンセル</button>
+                            </div>
+                            <input type="hidden" name="order_email_scope" id="order-email-scope-hidden" value="order_only">
                         </fieldset>
-
+                        
                         <div class="summary-actions">
-                            <a href="confilm.html" class="btn btn-primary btn-full">確認画面へ進む</a>
+                            <!-- <button type="button" class="btn btn-outline btn-full">内容を保存してカートに追加</button> -->
+                            <a href="confilm.html" class="btn btn-primary btn-full" id="btn-summary-proceed">確認画面へ進む</a>
                         </div>
                     </div>
                 </aside>
@@ -262,7 +271,18 @@
                     <label for="email-verify-code-input">認証コード</label>
                     <input type="text" name="email_verify_code" id="email-verify-code-input" class="input-underline email-verify-modal__code-input" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="コードを入力">
                 </div>
-                <button type="button" class="btn btn-primary email-verify-modal__code-submit" id="btn-email-verify-code-submit">認証コードを送信</button>
+                <div class="email-verify-modal__scope" role="group" aria-labelledby="email-verify-modal-scope-title">
+                    <p class="email-verify-modal__scope-title" id="email-verify-modal-scope-title">メールアドレスの変更の範囲</p>
+                    <label class="email-verify-modal__scope-label">
+                        <input type="radio" name="order_email_scope_modal" value="order_only" id="email-scope-order-only" checked>
+                        <span>今回のみの変更</span>
+                    </label>
+                    <label class="email-verify-modal__scope-label">
+                        <input type="radio" name="order_email_scope_modal" value="mypage_also" id="email-scope-mypage">
+                        <span>マイページも変更</span>
+                    </label>
+                </div>
+                <button type="button" class="btn btn-primary email-verify-modal__code-submit" id="btn-email-verify-code-submit">認証する</button>
             </div>
         </div>
     </div>
@@ -279,7 +299,7 @@
             <div class="order-detail-modal__body email-verify-done-modal__body">
                 <p class="email-verify-modal__text email-verify-done-modal__message">認証が完了しました。</p>
                 <p class="email-verify-modal__text email-verify-done-modal__note">メールアドレスはマイページよりいつでもご変更いただけます。</p>
-                <a href="confilm.html" class="btn btn-primary btn-full email-verify-done-modal__link">ご注文の確認画面へ進む</a>
+                <a href="confilm.html" class="btn btn-primary btn-full email-verify-done-modal__link">ご注文確認画面へ</a>
             </div>
         </div>
     </div>
@@ -583,12 +603,51 @@
         (function () {
             var modal = document.getElementById('email-verify-modal');
             var doneModal = document.getElementById('email-verify-done-modal');
+            var setBlock = document.getElementById('summary-email-set-block');
+            var editBlock = document.getElementById('summary-email-edit-block');
+            var displayEl = document.getElementById('summary-email-display');
             var emailInput = document.getElementById('order-confirm-email-input');
-            var openBtn = document.getElementById('btn-order-email-verify');
+            var hiddenScope = document.getElementById('order-email-scope-hidden');
+            var changeBtn = document.getElementById('btn-summary-email-change');
+            var cancelBtn = document.getElementById('btn-summary-email-cancel');
+            var verifyBtn = document.getElementById('btn-order-email-verify');
             var codeSubmitBtn = document.getElementById('btn-email-verify-code-submit');
             var addressEl = document.getElementById('email-verify-modal-address');
             var codeInput = document.getElementById('email-verify-code-input');
-            if (!modal || !doneModal || !emailInput || !openBtn) return;
+
+            if (!modal || !doneModal || !setBlock || !editBlock || !emailInput || !changeBtn || !verifyBtn || !cancelBtn) return;
+
+            var storedEmail = displayEl ? displayEl.textContent.trim() : '';
+            emailInput.value = storedEmail;
+
+            function showSetView() {
+                setBlock.hidden = false;
+                editBlock.hidden = true;
+                if (verifyBtn) verifyBtn.disabled = false;
+                if (displayEl && storedEmail) displayEl.textContent = storedEmail;
+                emailInput.value = storedEmail;
+            }
+
+            function showEditView() {
+                setBlock.hidden = true;
+                editBlock.hidden = false;
+                emailInput.value = storedEmail;
+                if (verifyBtn) verifyBtn.disabled = false;
+                if (doneModal.hidden) {
+                    document.body.classList.remove('order-detail-modal-open');
+                }
+            }
+
+            function syncModalRadiosFromHidden() {
+                var v = hiddenScope && hiddenScope.value;
+                var mypage = modal.querySelector('#email-scope-mypage');
+                var orderOnly = modal.querySelector('#email-scope-order-only');
+                if (v === 'mypage_also' && mypage) {
+                    mypage.checked = true;
+                } else if (orderOnly) {
+                    orderOnly.checked = true;
+                }
+            }
 
             function openModal() {
                 modal.hidden = false;
@@ -596,9 +655,10 @@
                 doneModal.hidden = true;
                 doneModal.setAttribute('aria-hidden', 'true');
                 document.body.classList.add('order-detail-modal-open');
+                syncModalRadiosFromHidden();
                 if (addressEl) {
-                    var v = emailInput.value.trim();
-                    addressEl.textContent = v ? '送信先：' + v : '';
+                    var addr = emailInput.value.trim();
+                    addressEl.textContent = addr ? '送信先：' + addr : '';
                 }
                 if (codeInput) {
                     codeInput.value = '';
@@ -606,13 +666,18 @@
                 }
             }
 
-            function closeModal() {
+            function closeModal(focusEl) {
                 modal.hidden = true;
                 modal.setAttribute('aria-hidden', 'true');
                 if (doneModal.hidden) {
                     document.body.classList.remove('order-detail-modal-open');
-                    openBtn.focus();
                 }
+                var el = focusEl;
+                if (!el) {
+                    if (verifyBtn && !verifyBtn.disabled) el = verifyBtn;
+                    else if (emailInput) el = emailInput;
+                }
+                if (el && el.focus) el.focus();
             }
 
             function openDoneModal() {
@@ -629,10 +694,21 @@
                 doneModal.hidden = true;
                 doneModal.setAttribute('aria-hidden', 'true');
                 document.body.classList.remove('order-detail-modal-open');
-                openBtn.focus();
+                if (changeBtn && changeBtn.focus) changeBtn.focus();
             }
 
-            openBtn.addEventListener('click', function () {
+            changeBtn.addEventListener('click', function () {
+                showEditView();
+                emailInput.focus();
+            });
+
+            cancelBtn.addEventListener('click', function () {
+                closeModal();
+                showSetView();
+                emailInput.value = storedEmail;
+            });
+
+            verifyBtn.addEventListener('click', function () {
                 if (!emailInput.value.trim()) {
                     emailInput.focus();
                     return;
@@ -650,6 +726,15 @@
                         codeInput.focus();
                         return;
                     }
+                    var checked = modal.querySelector('input[name="order_email_scope_modal"]:checked');
+                    if (hiddenScope && checked) hiddenScope.value = checked.value;
+                    var v = emailInput.value.trim();
+                    if (v) {
+                        storedEmail = v;
+                        if (displayEl) displayEl.textContent = v;
+                        emailInput.value = v;
+                    }
+                    showSetView();
                     openDoneModal();
                 });
             }

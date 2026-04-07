@@ -53,13 +53,16 @@
                     '<tr><td colspan="3" class="muted">該当するお申し込みはありません。</td></tr>';
             } else {
                 weekOrders.sort(function (a, b) {
-                    return String(b.date).localeCompare(String(a.date));
+                    var da = a.appliedAt || a.date || "";
+                    var db = b.appliedAt || b.date || "";
+                    return String(db).localeCompare(String(da));
                 });
                 orderTbody.innerHTML = weekOrders
                     .map(function (o) {
+                        var dt = o.appliedAt || o.date;
                         return (
                             "<tr><td class=\"muted\">" +
-                            escapeHtml(window.AdminUtils.formatYmdJa(o.date)) +
+                            escapeHtml(window.AdminUtils.formatYmdHmJa(dt)) +
                             "</td><td>" +
                             escapeHtml(o.ordererName) +
                             "</td><td>" +
